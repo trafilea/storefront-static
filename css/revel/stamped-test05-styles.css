@@ -69,6 +69,10 @@
 	margin-bottom: 80px;
 }
 
+#reviewsoutside .stamped-container .stamped-summary .stamped-summary-ratings {
+	width: unset !important;
+}
+
 /* header rating stars */
 #reviewsoutside .stamped-container .stamped-summary-ratings .summary-rating .summary-rating-title::before {
 	color: #DA9187 !important;
@@ -206,7 +210,7 @@
 	font-size: 16px;
 }
 
-#reviewsoutside .stamped-container .stamped-content .F .stamped-review .stamped-review-body .stamped-review-footer {
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-body .stamped-review-footer {
 	display: flex;
 }
 
