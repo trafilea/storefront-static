@@ -1,0 +1,58 @@
+#reviewsoutside {
+	max-width: none;
+	padding: 0;
+	width: 100%
+}
+
+#reviewsoutside .title-comments {
+	color: #292929;
+	font-family: Jost;
+	font-weight: 700;
+	font-size: 42px;
+	margin-bottom: 18px;
+	margin-top: 20px;
+	text-align: center;
+}
+
+@media screen and (max-width: 540px) {
+	#reviewsoutside .title-comments {
+		font-size: 30px;
+	}
+}
+
+#reviewsoutside #stamped-main-widget {
+	margin: 0
+}
+
+#reviewsoutside .stamped-container {
+	max-width: none;
+	margin: 30px auto;
+	border: none;
+	padding: 0
+}
+
+@media screen and (max-width: 768px) {
+	#reviewsoutside .stamped-container {
+		margin: 0 auto
+	}
+}
+
+#reviewsoutside .stamped-container .stamped-summary-actions {
+	top: 150px !important;
+	position: absolute;
+	z-index: 3;
+	right: unset;
+	bottom: 0;
+	right: 50% + 85px;
+}
+
+
+#reviewsoutside .stamped-container .stamped-summary {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 80px;
+}
+
+#reviewsoutside .stamped-container .stamped-summary-ratings .summary-rating .summary-rating-title::before {
+	color: #DA9187 !important;
+}
