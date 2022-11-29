@@ -152,12 +152,12 @@
 }
 
 /* container of the comments */
-#reviewsoutside .stamped-container .stamped-content .stamped-reviews-tab {
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews {
 	padding: 0 12px;
 }
 
 /* each review comment card */
-#reviewsoutside .stamped-container .stamped-content .stamped-reviews-tab .stamped-review {
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review {
 	padding: 0 12px;
 	background-color: #F8F8F8 !important;
 	padding: 24px 24px 12px 24px;
@@ -165,18 +165,18 @@
 }
 
 /* review card header items */
-#reviewsoutside .stamped-container .stamped-content .stamped-reviews-tab .stamped-review .stamped-review-header .stamped-review-avatar {
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-header .stamped-review-avatar {
 	display: none;
 }
 
-#reviewsoutside .stamped-container .stamped-content .stamped-reviews-tab .stamped-review .stamped-review-header .author {
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-header .author {
 	font-family: Jost;
 	font-weight: 600;
 	font-size: 16px;
 	margin-bottom: 4px;
 }
 
-#reviewsoutside .stamped-container .stamped-content .stamped-reviews-tab .stamped-review .stamped-review-header .stamped-verified-badge {
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-header .stamped-verified-badge {
 	color: #E7B8A6;
 	font-family: Jost;
 	font-weight: 600;
@@ -184,15 +184,15 @@
 	margin-left: 8px;
 }
 
-#reviewsoutside .stamped-container .stamped-content .stamped-reviews-tab .stamped-review .stamped-review-header .stamped-starratings {
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-header .stamped-starratings {
 	margin-top: 4px;
 }
 
-#reviewsoutside .stamped-container .stamped-content .stamped-reviews-tab .stamped-review .stamped-review-header .stamped-starratings > * {
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-header .stamped-starratings > * {
 	color: #DA918A;
 }
 
-#reviewsoutside .stamped-container .stamped-content .stamped-reviews-tab .stamped-review .stamped-review-body .stamped-review-header-title {
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-body .stamped-review-header-title {
 	font-family: Jost;
 	font-weight: 600;
 	font-size: 16px;
@@ -200,16 +200,21 @@
 	margin-top: 8px;
 }
 
-#reviewsoutside .stamped-container .stamped-content .stamped-reviews-tab .stamped-review .stamped-review-body .stamped-review-content-body {
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-body .stamped-review-content-body {
 	font-family: Jost;
 	font-weight: 400;
 	font-size: 16px;
 }
 
-#reviewsoutside .stamped-container .stamped-content .stamped-reviews-tab .stamped-review .stamped-review-body .stamped-review-footer {
+#reviewsoutside .stamped-container .stamped-content .F .stamped-review .stamped-review-body .stamped-review-footer {
 	display: flex;
 }
 
-#reviewsoutside .stamped-container .stamped-content .stamped-reviews-tab .stamped-review .stamped-review-body .stamped-review-footer .stamped-review-share {
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-body .stamped-review-footer .stamped-review-share {
 	display: none;
+}
+
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-body .stamped-review-footer .stamped-review-vote .stamped-rating-holder .stamped-thumbs-up .stamped-fa::before, 
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-body .stamped-review-footer .stamped-review-vote .stamped-rating-holder .stamped-thumbs-down .stamped-fa::before {
+	font-size: 20px;
 }
