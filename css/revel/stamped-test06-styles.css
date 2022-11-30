@@ -38,8 +38,15 @@
 	}
 }
 
+/* #reviewsoutside .stamped-container .stamped-header {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+} */
+
 /* The action where the header buttons are */
 #reviewsoutside .stamped-container .stamped-summary-actions {
+	display: none !important;
 	top: 150px !important;
 	position: absolute;
 	z-index: 3;
@@ -66,7 +73,19 @@
 #reviewsoutside .stamped-container .stamped-summary {
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: 80px;
+	/* margin-bottom: 80px; */
+}
+
+#reviewsoutside .stamped-container .stamped-summary .stamped-summary-photos {
+	position: absolute;
+	z-index: 3;
+	bottom: 0;
+	right: calc(50% - 130px);
+	margin-bottom: -14px;
+}
+
+#reviewsoutside .stamped-container .stamped-summary .stamped-summary-photos .stamped-photos-title {
+	display: none !important;
 }
 
 #reviewsoutside .stamped-container .stamped-summary .stamped-summary-ratings {
@@ -97,7 +116,7 @@
 
 /* Header "based on" review text */
 #reviewsoutside .stamped-container .stamped-summary .summary-overview .stamped-summary-caption .stamped-summary-text {
-	font-size: 16;
+	font-size: 18px !important;
 	font-weight: 400;
 	font-family: Jost;
 }
