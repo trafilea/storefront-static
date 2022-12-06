@@ -163,6 +163,10 @@
 	margin-left: 2px;
 }
 
+#reviewsoutside .stamped-container .stamped-content .stamped-tab-container .stamped-tabs>li:last-child {
+    display: none !important;
+}
+
 /* the select sort button */
 #reviewsoutside .stamped-container .stamped-content .stamped-reviews-filter .stamped-sort-select-wrapper .stamped-sort-select {
 	font-family: Jost;
@@ -241,3 +245,7 @@
 #reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-body .stamped-review-footer .stamped-review-vote .stamped-rating-holder .stamped-thumbs-down .stamped-fa::before {
 	font-size: 20px;
 }
+
+#reviewsoutside .stamped-container .stamped-content .stamped-tab-container .stamped-tabs>li:last-child {
+	display: none !important;
+  }
