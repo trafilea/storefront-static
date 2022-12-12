@@ -38,12 +38,6 @@
 	}
 }
 
-/* #reviewsoutside .stamped-container .stamped-header {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-} */
-
 /* The action where the header buttons are */
 #reviewsoutside .stamped-container .stamped-summary-actions {
 	display: none !important;
@@ -112,9 +106,10 @@
     font-weight: 600 !important;
 }
 
-@media only screen and (max-width: 480px)
-.stamped-header-title, .stamped-summary {
-	flex-direction: column !important;
+@media only screen and (max-width: 480px) {
+	.stamped-header-title, .stamped-summary {
+		flex-direction: column !important;
+	}
 }
 
 /* header big rating number */
@@ -248,6 +243,11 @@
 	font-size: 16px;
 }
 
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-body .stamped-review-content-body .stamped-review-read-more {
+	color: #292929;
+    font-weight: 500;
+}
+
 #reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-body .stamped-review-footer {
 	display: flex;
 }
@@ -263,4 +263,8 @@
 
 #reviewsoutside .stamped-container .stamped-content .stamped-tab-container .stamped-tabs>li:last-child {
 	display: none !important;
-  }
+}
+
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-pagination li a {
+	color: #292929;
+}
