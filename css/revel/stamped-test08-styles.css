@@ -90,6 +90,7 @@
 
 #reviewsoutside .stamped-container .stamped-summary .stamped-summary-ratings {
 	width: unset !important;
+	border-right: none !important;
 }
 
 /* header rating stars */
