@@ -103,6 +103,20 @@
 	display: none;
 }
 
+.summary-rating-count:before, .summary-rating-count:after {
+    content: '' !important;
+}
+
+.summary-rating-count {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+@media only screen and (max-width: 480px)
+.stamped-header-title, .stamped-summary {
+	flex-direction: column !important;
+}
+
 /* header big rating number */
 #reviewsoutside .stamped-container .stamped-summary .summary-overview .stamped-summary-caption .stamped-summary-text-1 {
 	font-family: Georgia;
