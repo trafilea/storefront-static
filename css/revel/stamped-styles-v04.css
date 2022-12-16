@@ -188,6 +188,13 @@
 	padding: 8px 20px!important;
 }
 
+@media only screen and (max-width: 480px){
+	select#stamped-sort-select {
+		border: 1px solid #BBBBBB !important;
+		margin-right: 10px !important;
+	}
+}
+
 /* container of the comments */
 #reviewsoutside .stamped-container .stamped-content .stamped-reviews {
 	padding: 0 12px;
