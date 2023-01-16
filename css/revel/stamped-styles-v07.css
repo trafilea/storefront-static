@@ -75,6 +75,12 @@
 	max-width: 695px !important;
 	clear: both;
     float: left;
+	width: 100%;
+}
+
+.stamped-photos-carousel {
+	display: flex;
+	justify-content: center;
 }
 
 .stamped-photos-carousel .stamped-photo {
