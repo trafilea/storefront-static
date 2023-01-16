@@ -78,9 +78,9 @@
 }
 
 .stamped-photos-carousel .stamped-photo {
-	width: 135px;
-	height: 157px;
-	border-radius: 8px;
+	width: 135px !important;
+	height: 157px !important;
+	border-radius: 8px !important;
 }
 
 #reviewsoutside .stamped-container .stamped-summary .stamped-summary-photos .stamped-photos-title {
