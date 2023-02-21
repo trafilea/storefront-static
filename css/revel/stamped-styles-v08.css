@@ -213,10 +213,15 @@
 	padding: 8px 20px!important;
 }
 
-@media only screen and (max-width: 480px){
+@media only screen and (max-width: 480px) {
 	select#stamped-sort-select {
 		border: 1px solid #BBBBBB !important;
 		margin-right: 10px !important;
+	}
+
+	/* Remove the defaut mobile header title */
+	#reviewsoutside .stamped-container .stamped-header-title {
+		display: none !important;
 	}
 }
 
