@@ -1,7 +1,3 @@
-const TrafiCheckout = window.TrafiCheckout
-
-const TrafiProducts = window.TrafiProducts
-
 const ProductSelector = {
     config: {
         triggered_by: "",
