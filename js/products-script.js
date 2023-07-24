@@ -66,9 +66,9 @@ const TrafiProducts = {
 
             const responseJson = await response.json()
 
-            if(responseJson.status_code === 404) throw new Error(responseJson.message)
-            
-            return  responseJson
+            if (responseJson.status_code === 404) throw new Error(responseJson.message)
+
+            return responseJson
         },
         multipleQuery: (product_ids, byVendor) => {
             if (!product_ids?.length) throw new Error("Product IDs are required")

@@ -78,19 +78,22 @@ const ProductSelector = {
             console.log("ProductSelector: Successfully selected product:", ProductSelector.state.product_selected)
         },
         checkout: async () => {
-            if(!ProductSelector.state.product_selected) throw new Error("ProductSelector: No product selected")
+            if (!ProductSelector.state.product_selected) throw new Error("ProductSelector: No product selected")
             ProductSelector._.trackAddToCart(ProductSelector.state.product_selected)
             await TrafiCheckout.checkout.buyNow(ProductSelector.state.product_selected)
 
         },
         setupTriggers: () => {
+
             ProductSelector.config.products.triggers.forEach((trigger) => {
+                document.getElementsByClassName(trigger)[0]?.removeEventListener("click", () => { })
                 document.getElementsByClassName(trigger)[0]?.addEventListener("click", () => {
                     ProductSelector._.onSelect(trigger)
                 })
             })
 
             if (ProductSelector.config.triggered_by) {
+                document.getElementsByClassName(ProductSelector.config.triggered_by)[0]?.removeEventListener("click", () => { })
                 document.getElementsByClassName(ProductSelector.config.triggered_by)[0]?.addEventListener("click", () => {
                     ProductSelector._.checkout()
                 })

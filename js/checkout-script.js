@@ -37,7 +37,7 @@ const TrafiCheckout = {
         cart_url: 'https://api.{vendor}.{environment}.trafilea.io/cart',
     },
     _: {
-        formatValue:(number) => Number(number.toFixed(2)),
+        formatValue: (number) => Number(number.toFixed(2)),
         generatePayload: (cart) => {
             const data = {
                 token: cart.token,
@@ -49,7 +49,7 @@ const TrafiCheckout = {
             };
 
             const context = {};
-            
+
             const config = TrafiCheckout.config
 
             const payload = {
@@ -77,7 +77,9 @@ const TrafiCheckout = {
         }),
         updateCart: async (cart) => {
             console.log('Hitting Trafilea APIs --------')
-            const url = TrafiCheckout.config.cart_url.replace("{vendor}", TrafiCheckout.config.vendor).replace("{environment}", TrafiCheckout.config.environment);
+            const url = TrafiCheckout.config.cart_url.replace("{vendor}", TrafiCheckout.config.vendor)
+                .replace("{environment}", TrafiCheckout.config.environment);
+
             console.log('Endpoint is:', url)
             console.log('HC Cart is', cart);
 
@@ -98,6 +100,7 @@ const TrafiCheckout = {
                     body: JSON.stringify(payload)
                     ,
                 })
+                if (cartResponse.status !== 200) throw new Error(cartResponse)
 
                 return cartResponse.json()
 
@@ -120,7 +123,7 @@ const TrafiCheckout = {
     cart: {
         createItem: ({ product, variant, quantity, ...rest }) => ({
             "tags": product.tags,
-            "type": product.type,
+            "type": product.type ?? 'product',
             "product_id": product.product_id,
             "variant_id": variant.id,
             "sku": variant.sku,
@@ -132,7 +135,7 @@ const TrafiCheckout = {
             "unit_price": variant.price,
             "unit_price_total": TrafiCheckout._.formatValue(variant.price * quantity),
             "image_url": variant.images[0].src,
-            "vendor": product.vendor_product.bigcommerce,
+            "vendor": product.vendor_product.vendor_id,
             "shop": product.vendor_product.store_id,
             "discounts_total": rest.discount,
             "discount_label": rest.discount_label,
