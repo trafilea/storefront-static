@@ -82,13 +82,13 @@ const ProductSelector = {
         },
         setupTriggers: () => {
             ProductSelector.config.products.triggers.forEach((trigger) => {
-                document.getElementsByClassName(trigger).item(0).addEventListener("click", () => {
+                document.getElementsByClassName(trigger)[0]?.addEventListener("click", () => {
                     ProductSelector._.onSelect(trigger)
                 })
             })
 
             if (ProductSelector.config.triggered_by) {
-                document.getElementsByClassName(ProductSelector.config).item(0).addEventListener("click", () => {
+                document.getElementsByClassName(ProductSelector.config)[0]?.addEventListener("click", () => {
                     ProductSelector._.checkout()
                 })
             }
