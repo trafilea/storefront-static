@@ -54,7 +54,7 @@ const TrafiProducts = {
             if (!slug) throw new Error("Slug is required")
 
             const url = TrafiProducts.config.api_by_trafi.replace("{environment}", TrafiProducts.config.environment)
-                .concat(`?slug=${productId}&store=${TrafiProducts.config.store}`)
+                .concat(`?slug=${slug}&store=${TrafiProducts.config.store}`)
 
 
             const response = await fetch(url, {
@@ -64,7 +64,11 @@ const TrafiProducts = {
                 }
             })
 
-            return response.json()
+            const responseJson = await response.json()
+
+            if(responseJson.status_code === 404) throw new Error(responseJson.message)
+            
+            return  responseJson
         },
         multipleQuery: (product_ids, byVendor) => {
             if (!product_ids?.length) throw new Error("Product IDs are required")
