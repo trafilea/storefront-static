@@ -55,7 +55,8 @@ const ProductSelector = {
 
             ProductSelector.state.product_selected = {
                 product,
-                variant: product.product_variations,
+                //TODO: make this configurable
+                variant: product.variations_definition.product_variations[0],
                 ...ProductSelector.config.products.extras[index],
             }
 
@@ -64,13 +65,14 @@ const ProductSelector = {
                 document.getElementsByClassName(ProductSelector.config.image_selector)[0].src = newImage
             }
 
-            const elementToMark = ProductSelector.config.products.elementsToMark[index]
+            const elementClassToMark = ProductSelector.config.products.elementsToMark[index]
+            const elementToMark = document.getElementsByClassName(elementClassToMark)[0]
 
             if (elementToMark) {
                 ProductSelector.config.products.elementsToMark?.forEach((element) => {
-                    document.getElementsByClassName(element)[0].className.replace("selected", "")
+                    document.getElementsByClassName(element)[0]?.classList.remove("selected")
                 })
-                document.getElementsByClassName(elementToMark)[0].className = + " selected"
+                elementToMark.classList.add("selected")
             }
 
             console.log("ProductSelector: Successfully selected product:", ProductSelector.state.product_selected)
@@ -104,9 +106,9 @@ const ProductSelector = {
         TrafiProducts.init(base)
 
         ProductSelector.config = { ...ProductSelector.config, ...configOverride }
-        
+
         await ProductSelector._.fetchProducts()
-        
+
         ProductSelector._.setupTriggers()
 
         console.log("ProductSelector: Successfully set config")
