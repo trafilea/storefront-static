@@ -39,7 +39,6 @@ const TrafiCheckout = {
     _: {
         formatValue:(number) => Number(number.toFixed(2)),
         generatePayload: (cart) => {
-
             const data = {
                 token: cart.token,
                 currency: cart.currency,
@@ -50,6 +49,8 @@ const TrafiCheckout = {
             };
 
             const context = {};
+            
+            const config = TrafiCheckout.config
 
             const payload = {
                 vendor: config.vendor,
