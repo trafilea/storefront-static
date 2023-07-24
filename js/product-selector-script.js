@@ -2,6 +2,7 @@ const ProductSelector = {
     config: {
         triggered_by: "",
         image_selector: "",
+        default_selected: 0,
         products: {
             slugs: [],
             extras: [],
@@ -57,6 +58,7 @@ const ProductSelector = {
                 product,
                 //TODO: make this configurable
                 variant: product.variations_definition.product_variations[0],
+                quantity: 1,
                 ...ProductSelector.config.products.extras[index],
             }
 
@@ -114,6 +116,10 @@ const ProductSelector = {
         await ProductSelector._.fetchProducts()
 
         ProductSelector._.setupTriggers()
+
+        if (ProductSelector.config.default_selected) {
+            ProductSelector._.onSelect(ProductSelector.config.products.triggers[ProductSelector.config.default_selected])
+        }
 
         console.log("ProductSelector: Successfully set config")
     },
