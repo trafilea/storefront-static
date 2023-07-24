@@ -76,7 +76,7 @@ const TrafiCheckout = {
         }),
         updateCart: async (cart) => {
             console.log('Hitting Trafilea APIs --------')
-            const url = TrafiCheckout.cart_url.replace("{vendor}", TrafiCheckout.config.vendor).replace("{environment}", TrafiCheckout.config.environment);
+            const url = TrafiCheckout.config.cart_url.replace("{vendor}", TrafiCheckout.config.vendor).replace("{environment}", TrafiCheckout.config.environment);
             console.log('Endpoint is:', url)
             console.log('HC Cart is', cart);
 
