@@ -83,7 +83,7 @@ const TrafiProducts = {
         getProducts: (slugs) => {
             if (!slugs?.length) throw new Error("Slugs are required")
 
-            return Promise.all(product_ids.map(async (slug) => TrafiProducts._.slugQuery(slug)))
+            return Promise.all(slugs.map(async (slug) => TrafiProducts._.slugQuery(slug)))
         },
     },
     byVendor: {
