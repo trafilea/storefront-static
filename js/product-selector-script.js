@@ -97,16 +97,16 @@ const ProductSelector = {
     },
     init: ({ base, ...configOverride }) => {
         if (!base) throw new Error("ProductSelector: base is required")
-       
+
         if (!TrafiCheckout || !TrafiProducts) throw new Error("ProductSelector: TrafiCheckout & and TrafiProducts dependencies are required")
-       
+
         TrafiCheckout.init(base)
         TrafiProducts.init(base)
-       
+
         ProductSelector.config = { ...ProductSelector.config, ...configOverride }
         ProductSelector._.setupTriggers()
 
         console.log("ProductSelector: Successfully set config")
     },
-    checkout: ProductSelector._.checkout,
+    checkout: () => ProductSelector._.checkout(),
 }
