@@ -53,7 +53,7 @@ const TrafiProducts = {
         multipleQuery: (product_ids, byVendor) => {
             if (!product_ids?.length) throw new Error("Product IDs are required")
 
-            return Promise.all(product_ids.map(async (product_id) => baseQuery(product_id, byVendor)))
+            return Promise.all(product_ids.map(async (product_id) => TrafiProducts._.baseQuery(product_id, byVendor)))
         },
     },
     init: (configOverride) => {
