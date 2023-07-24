@@ -26,11 +26,11 @@ const ProductSelector = {
                             {
                                 name: productObj.title,
                                 id: String(productObj.id),
-                                price: formatMoneyWithoutCurrency(productObj.price),
+                                price: productObj.price,
                                 brand: productObj.vendor,
                                 category: productObj.type,
-                                variant: productObj.variants[0].id,
-                                sku: productObj.variants[0].sku,
+                                variant: productObj.variant.id,
+                                sku: productObj.variant.sku,
                                 quantity
                             }
                         ]
@@ -78,8 +78,9 @@ const ProductSelector = {
             console.log("ProductSelector: Successfully selected product:", ProductSelector.state.product_selected)
         },
         checkout: async () => {
+            if(!ProductSelector.state.product_selected) throw new Error("ProductSelector: No product selected")
             ProductSelector._.trackAddToCart(ProductSelector.state.product_selected)
-            await TrafiCheckout.cart.buyNow(ProductSelector.state.product_selected)
+            await TrafiCheckout.checkout.buyNow(ProductSelector.state.product_selected)
 
         },
         setupTriggers: () => {

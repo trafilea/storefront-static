@@ -37,6 +37,7 @@ const TrafiCheckout = {
         cart_url: 'https://api.{vendor}.{environment}.trafilea.io/cart',
     },
     _: {
+        formatValue:(number) => Number(number.toFixed(2)),
         generatePayload: (cart) => {
 
             const data = {
@@ -123,12 +124,12 @@ const TrafiCheckout = {
             "variant_id": variant.id,
             "sku": variant.sku,
             "compare_at_price": variant.compare_at_price,
-            "compare_at_price_total": variant.compare_at_price * item.quantity,
+            "compare_at_price_total": TrafiCheckout._.formatValue(variant.compare_at_price * quantity),
             "name": product.title,
             "description": variant.title,
             "quantity": quantity,
             "unit_price": variant.price,
-            "unit_price_total": variant.price * quantity,
+            "unit_price_total": TrafiCheckout._.formatValue(variant.price * quantity),
             "image_url": variant.images[0].src,
             "vendor": product.vendor_product.bigcommerce,
             "shop": product.vendor_product.store_id,
