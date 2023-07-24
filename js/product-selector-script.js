@@ -95,7 +95,7 @@ const ProductSelector = {
             console.log("ProductSelector: Successfully setup triggers")
         }
     },
-    init: ({ base, ...configOverride }) => {
+    init: async ({ base, ...configOverride }) => {
         if (!base) throw new Error("ProductSelector: base is required")
 
         if (!TrafiCheckout || !TrafiProducts) throw new Error("ProductSelector: TrafiCheckout & and TrafiProducts dependencies are required")
@@ -104,6 +104,9 @@ const ProductSelector = {
         TrafiProducts.init(base)
 
         ProductSelector.config = { ...ProductSelector.config, ...configOverride }
+        
+        await ProductSelector._.fetchProducts()
+        
         ProductSelector._.setupTriggers()
 
         console.log("ProductSelector: Successfully set config")
