@@ -19,7 +19,7 @@ const TrafiProducts = {
               * Products public endpoint
               * @type String
               */
-        api_by_trafi: 'https://api.{environment}.trafilea.io/products/{product_id}',
+        api_by_trafi: 'https://api.{environment}.trafilea.io/products',
         /**
             * Products by Vendor public endpoint
             * @type String
@@ -35,11 +35,27 @@ const TrafiProducts = {
                 .replace("{product_id}", productId),
         buildTrafiUrl: (productId) =>
             TrafiProducts.config.api_by_trafi.replace("{environment}", TrafiProducts.config.environment)
-                .replace("{product_id}", productId),
+                .concat(`/${productId}`),
         baseQuery: async (product_id, byVendor) => {
             if (!product_id) throw new Error("Product ID is required")
 
             const url = byVendor ? TrafiProducts._.buildByVendorUrl(product_id) : TrafiProducts._.buildTrafiUrl(product_id)
+
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json'
+                }
+            })
+
+            return response.json()
+        },
+        slugQuery: async (slug) => {
+            if (!slug) throw new Error("Slug is required")
+
+            const url = TrafiProducts.config.api_by_trafi.replace("{environment}", TrafiProducts.config.environment)
+                .concat(`?slug=${productId}&store=${TrafiProducts.config.store}`)
+
 
             const response = await fetch(url, {
                 method: 'GET',
@@ -62,6 +78,14 @@ const TrafiProducts = {
     },
     getProduct: (productId) => TrafiProducts._.baseQuery(productId, false),
     getProducts: (productIds) => TrafiProducts._.multipleQuery(productIds, false),
+    bySlug: {
+        getProduct: (slug) => TrafiProducts._.slugQuery(slug),
+        getProducts: (slugs) => {
+            if (!slugs?.length) throw new Error("Slugs are required")
+
+            return Promise.all(product_ids.map(async (slug) => TrafiProducts._.slugQuery(slug)))
+        },
+    },
     byVendor: {
         getProduct: (productId) => TrafiProducts._.baseQuery(productId, true),
         getProducts: (productIds) => TrafiProducts._.multipleQuery(productIds, true),
