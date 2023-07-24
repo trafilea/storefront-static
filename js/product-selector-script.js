@@ -88,7 +88,7 @@ const ProductSelector = {
             })
 
             if (ProductSelector.config.triggered_by) {
-                document.getElementsByClassName(ProductSelector.config)[0]?.addEventListener("click", () => {
+                document.getElementsByClassName(ProductSelector.config.triggered_by)[0]?.addEventListener("click", () => {
                     ProductSelector._.checkout()
                 })
             }
