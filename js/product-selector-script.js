@@ -3,7 +3,7 @@ const ProductSelector = {
         triggered_by: "",
         image_selector: "",
         products: {
-            ids: [],
+            slugs: [],
             extras: [],
             triggers: [],
             elementsToMark: []
@@ -39,7 +39,7 @@ const ProductSelector = {
             });
         },
         fetchProducts: async () => {
-            const products = await TrafiProducts.getProducts(ProductSelector.config.products.ids)
+            const products = await TrafiProducts.bySlug.getProducts(ProductSelector.config.products.slugs)
 
             ProductSelector.state.products = products
 
