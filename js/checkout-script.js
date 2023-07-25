@@ -56,8 +56,8 @@ const TrafiCheckout = {
                 vendor: config.vendor,
                 shop: config.store,
                 token: cart.token,
-                data: data,
-                context: context
+                data,
+                context
             };
 
             return payload;
@@ -76,15 +76,12 @@ const TrafiCheckout = {
             taxes: 0
         }),
         updateCart: async (cart) => {
-            console.log('Hitting Trafilea APIs --------')
             const url = TrafiCheckout.config.cart_url.replace("{vendor}", TrafiCheckout.config.vendor)
                 .replace("{environment}", TrafiCheckout.config.environment);
 
-            console.log('Endpoint is:', url)
-            console.log('HC Cart is', cart);
+            console.log('Endpoint is:', url, 'HC Cart is:', cart)
 
             const payload = TrafiCheckout._.generatePayload(cart)
-
 
             try {
                 const controller = new AbortController()
@@ -121,11 +118,13 @@ const TrafiCheckout = {
         console.log("HC Init with [STORE]:" + TrafiCheckout.config.store)
     },
     cart: {
-        createItem: ({ product, variant, quantity, ...rest }) => ({
+        createItem: ({ product, variant, quantity = 1, ...rest }) => ({
             "tags": product.tags,
             "type": product.type ?? 'product',
-            "product_id": product.product_id,
-            "variant_id": variant.id,
+            "product_uuid": product.id,
+            "product_id": product.vendor_product.product_id,
+            "variant_uuid": variant.id,
+            "variant_id":  product.vendor_product.variations_id[variant.id],
             "sku": variant.sku,
             "compare_at_price": variant.compare_at_price,
             "compare_at_price_total": TrafiCheckout._.formatValue(variant.compare_at_price * quantity),
@@ -144,7 +143,7 @@ const TrafiCheckout = {
         buildFromItems: (itemsToTransform) => {
             const items = itemsToTransform.map(item => TrafiCheckout.cart.createItem(item));
             const totals = TrafiCheckout._.calculateTotals(items)
-            return { token: undefined, currency: TrafiCheckout.config.currency, items, totals }
+            return { currency: TrafiCheckout.config.currency, items, totals }
         },
         create: async (cart) => TrafiCheckout._.updateCart(cart),
         update: async (cart) => TrafiCheckout._.updateCart(cart),
@@ -219,14 +218,11 @@ const TrafiCheckout = {
         },
         buyNow: async (item) => {
             const cart = await TrafiCheckout.cart.create(TrafiCheckout.cart.buildFromItems([item]))
-            TrafiCheckout.checkout.redirect(cart.id)
+            TrafiCheckout.checkout.redirect(cart.token)
         },
         start: async (cart) => {
             const updatedCart = await TrafiCheckout._.updateCart(cart)
-            const hc_url = TrafiCheckout.config.checkout_url.replace("{domain}", TrafiCheckout.config.domain).replace("{cart_id}", updatedCart.token);
-            console.log('HC URL is:', hc_url);
-            window.location.assign(hc_url);
-            return updatedCart
+            TrafiCheckout.checkout.redirect(updatedCart.token)
         },
     }
 
