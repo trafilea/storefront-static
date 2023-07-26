@@ -15,7 +15,114 @@ const ProductSelector = {
         product_selected: undefined
     },
     _: {
-        trackAddToCart: function (productObj, quantity) {
+        setLoading: () => {
+            const loading = document.createElement("div")
+            loading.innerHTML = `
+                                <style>
+                                .loader,
+                                .loader:before,
+                                .loader:after {
+                                border-radius: 50%;
+                                width: 2.5em;
+                                height: 2.5em;
+                                -webkit-animation-fill-mode: both;
+                                animation-fill-mode: both;
+                                -webkit-animation: load7 1.8s infinite ease-in-out;
+                                animation: load7 1.8s infinite ease-in-out;
+                                }
+                                .loader {
+                                color: #000000;
+                                font-size: 10px;
+                                margin: 10px auto 50px;
+                                position: relative;
+                                text-indent: -9999em;
+                                -webkit-transform: translateZ(0);
+                                -ms-transform: translateZ(0);
+                                transform: translateZ(0);
+                                -webkit-animation-delay: -0.16s;
+                                animation-delay: -0.16s;
+                                }
+                                .loader:before,
+                                .loader:after {
+                                content: '';
+                                position: absolute;
+                                top: 0;
+                                }
+                                .loader:before {
+                                left: -3.5em;
+                                -webkit-animation-delay: -0.32s;
+                                animation-delay: -0.32s;
+                                }
+                                .loader:after {
+                                left: 3.5em;
+                                }
+                                @-webkit-keyframes load7 {
+                                0%,
+                                80%,
+                                100% {
+                                box-shadow: 0 2.5em 0 -1.3em;
+                                }
+                                40% {
+                                box-shadow: 0 2.5em 0 0;
+                                }
+                                }
+                                @keyframes load7 {
+                                0%,
+                                80%,
+                                100% {
+                                box-shadow: 0 2.5em 0 -1.3em;
+                                }
+                                40% {
+                                box-shadow: 0 2.5em 0 0;
+                                }
+                                }
+
+                                .loading-overlay {
+                                position: fixed;
+                                top: 0;
+                                bottom: 0;
+                                left: 0;
+                                right: 0;
+                                background: rgba(0, 0, 0, 0.7);
+                                transition: opacity 500ms;
+                                opacity: 1;
+                                z-index: 111;
+                                }
+                                .popup {
+                                margin: 20% auto;
+                                padding: 40px;
+                                background: #fff;
+                                border-radius: 5px;
+                                width: 30%;
+                                min-width: 300px;
+                                position: relative;
+                                transition: all 5s ease-in-out;
+                                text-align: center;
+                                }
+
+                                .popup h2 {
+                                margin-top: 0;
+                                color: #333;
+                                font-family: Tahoma, Arial, sans-serif;
+                                }
+
+                                .popup .content {
+                                max-height: 30%;
+                                overflow: auto;
+                                }
+                                </style>
+                                <div class="loading-overlay">
+                                <div class="popup">
+                                <div class="loader"></div>
+                                <div class="content">
+                                    Checking availability...		
+                                </div>
+                                </div>
+                                </div>`
+
+            document.body.appendChild(loading)
+        },
+        trackAddToCart: ({ product, variant, quantity }) => {
             window.dataLayer = window.dataLayer || [];
 
             window.dataLayer.push({
@@ -25,13 +132,13 @@ const ProductSelector = {
                     add: {
                         products: [
                             {
-                                name: productObj.title,
-                                id: String(productObj.id),
-                                price: productObj.price,
-                                brand: productObj.vendor,
-                                category: productObj.type,
-                                variant: productObj.variant.id,
-                                sku: productObj.variant.sku,
+                                name: product.title,
+                                id: String(product.id),
+                                price: product.price,
+                                brand: product.vendor,
+                                category: product.type,
+                                variant: variant.id,
+                                sku: variant.sku,
                                 quantity
                             }
                         ]
@@ -39,6 +146,7 @@ const ProductSelector = {
                 }
             });
         },
+
         fetchProducts: async () => {
             const products = await TrafiProducts.bySlug.getProducts(ProductSelector.config.products.slugs)
 
