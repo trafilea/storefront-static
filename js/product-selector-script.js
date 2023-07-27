@@ -189,7 +189,11 @@ const ProductSelector = {
         },
         checkout: async () => {
             if (!ProductSelector.state.product_selected) throw new Error("ProductSelector: No product selected")
+
+            ProductSelector._.setLoading()
+
             ProductSelector._.trackAddToCart(ProductSelector.state.product_selected)
+
             await TrafiCheckout.checkout.buyNow(ProductSelector.state.product_selected)
 
         },
@@ -203,9 +207,12 @@ const ProductSelector = {
             })
 
             if (ProductSelector.config.triggered_by) {
-                document.getElementsByClassName(ProductSelector.config.triggered_by)[0]?.removeEventListener("click", () => { })
-                document.getElementsByClassName(ProductSelector.config.triggered_by)[0]?.addEventListener("click", () => {
+                const triggeredBy = document.getElementsByClassName(ProductSelector.config.triggered_by)[0]
+                triggeredBy?.removeEventListener("click", () => { })
+                triggeredBy?.addEventListener("click", (event) => {
+                    event.preventDefault()
                     ProductSelector._.checkout()
+
                 })
             }
             console.log("ProductSelector: Successfully setup triggers")
@@ -225,7 +232,7 @@ const ProductSelector = {
 
         ProductSelector._.setupTriggers()
 
-        if (ProductSelector.config.default_selected) {
+        if (typeof ProductSelector.config.default_selected === "number") {
             ProductSelector._.onSelect(ProductSelector.config.products.triggers[ProductSelector.config.default_selected])
         }
 
