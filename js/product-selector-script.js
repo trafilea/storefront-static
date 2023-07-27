@@ -134,9 +134,9 @@ const ProductSelector = {
                             {
                                 name: product.title,
                                 id: String(product.id),
-                                price: product.price,
+                                price: variant.price,
                                 brand: product.vendor,
-                                category: product.type,
+                                category: product.category ?? "Product",
                                 variant: variant.id,
                                 sku: variant.sku,
                                 quantity
