@@ -122,7 +122,7 @@ const ProductSelector = {
 
             document.body.appendChild(loading)
         },
-        trackAddToCart: function (productObj, quantity) {
+        trackAddToCart: ({ product, variant, quantity }) => {
             window.dataLayer = window.dataLayer || [];
 
             window.dataLayer.push({
@@ -132,13 +132,13 @@ const ProductSelector = {
                     add: {
                         products: [
                             {
-                                name: productObj.title,
-                                id: String(productObj.id),
-                                price: productObj.price,
-                                brand: productObj.vendor,
-                                category: productObj.type,
-                                variant: productObj.variant.id,
-                                sku: productObj.variant.sku,
+                                name: product.title,
+                                id: String(product.id),
+                                price: product.price,
+                                brand: product.vendor,
+                                category: product.type,
+                                variant: variant.id,
+                                sku: variant.sku,
                                 quantity
                             }
                         ]
@@ -146,6 +146,7 @@ const ProductSelector = {
                 }
             });
         },
+
         fetchProducts: async () => {
             const products = await TrafiProducts.bySlug.getProducts(ProductSelector.config.products.slugs)
 
