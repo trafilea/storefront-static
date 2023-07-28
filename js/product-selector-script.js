@@ -132,13 +132,19 @@ const ProductSelector = {
                     add: {
                         products: [
                             {
-                                name: product.title,
-                                id: String(product.id),
-                                price: variant.price,
                                 brand: product.vendor,
-                                category: product.category ?? "Product",
-                                variant: variant.id,
+                                name: product.title,
+                                id: product.vendor_product.product_id,
+                                uuid: product.id,
+                                variant_uuid: variant.id,
+                                price: variant.price,
+                                salePrice: variant.price,
+                                compare_at_price: variant.compare_at_price,
+                                unit_price: variant.price,
+                                category: product.category?.name ?? "Product",
+                                variant: product.vendor_product.variations_id?[variant.id] ?? "",
                                 sku: variant.sku,
+                                image: variant.images[0]?.src ?? "",
                                 quantity
                             }
                         ]
@@ -146,7 +152,6 @@ const ProductSelector = {
                 }
             });
         },
-
         fetchProducts: async () => {
             const products = await TrafiProducts.bySlug.getProducts(ProductSelector.config.products.slugs)
 
