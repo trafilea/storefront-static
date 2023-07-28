@@ -201,8 +201,12 @@ const ProductSelector = {
 
             ProductSelector.config.products.triggers.forEach((trigger) => {
                 document.getElementsByClassName(trigger)[0]?.removeEventListener("click", () => { })
-                document.getElementsByClassName(trigger)[0]?.addEventListener("click", () => {
+                document.getElementsByClassName(trigger)[0]?.addEventListener("click", (event) => {
+                    event.preventDefault()
                     ProductSelector._.onSelect(trigger)
+                    if (!ProductSelector.config.triggered_by) {
+                        ProductSelector._.checkout()
+                    }
                 })
             })
 
