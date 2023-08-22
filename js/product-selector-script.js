@@ -19,9 +19,9 @@ const ProductSelector = {
             const loading = document.createElement("div")
             loading.innerHTML = `
                                 <style>
-                                .loader,
-                                .loader:before,
-                                .loader:after {
+                                .new__loader,
+                                .new__loader:before,
+                                .new__loader:after {
                                 border-radius: 50%;
                                 width: 2.5em;
                                 height: 2.5em;
@@ -30,7 +30,7 @@ const ProductSelector = {
                                 -webkit-animation: load7 1.8s infinite ease-in-out;
                                 animation: load7 1.8s infinite ease-in-out;
                                 }
-                                .loader {
+                                .new__loader {
                                 color: #000000;
                                 font-size: 10px;
                                 margin: 10px auto 50px;
@@ -42,18 +42,18 @@ const ProductSelector = {
                                 -webkit-animation-delay: -0.16s;
                                 animation-delay: -0.16s;
                                 }
-                                .loader:before,
-                                .loader:after {
+                                .new__loader:before,
+                                .new__loader:after {
                                 content: '';
                                 position: absolute;
                                 top: 0;
                                 }
-                                .loader:before {
+                                .new__loader:before {
                                 left: -3.5em;
                                 -webkit-animation-delay: -0.32s;
                                 animation-delay: -0.32s;
                                 }
-                                .loader:after {
+                                .new__loader:after {
                                 left: 3.5em;
                                 }
                                 @-webkit-keyframes load7 {
@@ -87,6 +87,7 @@ const ProductSelector = {
                                 transition: opacity 500ms;
                                 opacity: 1;
                                 z-index: 111;
+                                width: 100%;
                                 }
                                 .popup {
                                 margin: 20% auto;
@@ -113,7 +114,7 @@ const ProductSelector = {
                                 </style>
                                 <div class="loading-overlay">
                                 <div class="popup">
-                                <div class="loader"></div>
+                                <div class="new__loader"></div>
                                 <div class="content">
                                     Checking availability...		
                                 </div>
