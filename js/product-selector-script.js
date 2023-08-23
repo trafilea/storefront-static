@@ -5,18 +5,20 @@ const ProductSelector = {
         default_selected: 0,
         products: {
             slugs: [],
+            extra_products: [],
             extras: [],
             triggers: [],
-            elementsToMark: []
+            elementsToMark: [],
         },
     },
     state: {
         products: [],
-        product_selected: undefined
+        product_selected: undefined,
+        extra_products: {},
     },
     _: {
         setLoading: () => {
-            const loading = document.createElement("div")
+            const loading = document.createElement("div");
             loading.innerHTML = `
                                 <style>
                                 .new__loader,
@@ -119,9 +121,9 @@ const ProductSelector = {
                                     Checking availability...		
                                 </div>
                                 </div>
-                                </div>`
+                                </div>`;
 
-            document.body.appendChild(loading)
+            document.body.appendChild(loading);
         },
         trackAddToCart: ({ product, variant, quantity }) => {
             window.dataLayer = window.dataLayer || [];
@@ -146,26 +148,49 @@ const ProductSelector = {
                                 variant: product.vendor_product.variations_id[variant.id] ?? "",
                                 sku: variant.sku,
                                 image: variant.images[0]?.src ?? "",
-                                quantity
-                            }
-                        ]
-                    }
-                }
+                                quantity,
+                            },
+                        ],
+                    },
+                },
             });
         },
         fetchProducts: async () => {
-            const products = await TrafiProducts.bySlug.getProducts(ProductSelector.config.products.slugs)
+            const products = await TrafiProducts.bySlug.getProducts(
+                ProductSelector.config.products.slugs
+            );
 
-            ProductSelector.state.products = products
+            ProductSelector.state.products = products;
+
+            const extraProductsSlugs = [
+                ...new Set(
+                    ProductSelector.config.products.extra_products?.flatMap(
+                        (product) => product
+                    )
+                ),
+            ];
+            if (extraProductsSlugs.length > 0) {
+                const extraProducts = await TrafiProducts.bySlug.getProducts(
+                    extraProductsSlugs
+                );
+                const extraProductsMap = extraProducts.reduce((acc, product) => {
+                    acc[product.slug] = product;
+                    return acc;
+                }, {});
+
+                ProductSelector.state.extra_products = extraProductsMap;
+            }
 
             console.log("ProductSelector: Successfully fetched Products");
         },
         onSelect: (trigger) => {
-            const index = ProductSelector.config.products.triggers.indexOf(trigger)
-            const product = ProductSelector.state.products[index]
+            const index = ProductSelector.config.products.triggers.indexOf(trigger);
+            const product = ProductSelector.state.products[index];
 
             if (!product) {
-                throw new Error("ProductSelector: error selecting product, it doenst exist on product list")
+                throw new Error(
+                    "ProductSelector: error selecting product, it doenst exist on product list"
+                );
             }
 
             ProductSelector.state.product_selected = {
@@ -173,80 +198,130 @@ const ProductSelector = {
                 //TODO: make this configurable
                 variant: product.variations_definition.product_variations[0],
                 quantity: 1,
+                extra_products: ProductSelector.config.products.extra_products[index],
                 ...ProductSelector.config.products.extras[index],
-            }
+            };
 
             if (ProductSelector.config.image_selector) {
-                const newImage = ProductSelector.state.product_selected.variant.images[0].src
-                document.getElementsByClassName(ProductSelector.config.image_selector)[0].src = newImage
+                const newImage =
+                    ProductSelector.state.product_selected.variant.images[0].src;
+                document.getElementsByClassName(
+                    ProductSelector.config.image_selector
+                )[0].src = newImage;
             }
 
-            const elementClassToMark = ProductSelector.config.products.elementsToMark[index]
-            const elementToMark = document.getElementsByClassName(elementClassToMark)[0]
+            const elementClassToMark =
+                ProductSelector.config.products.elementsToMark[index];
+            const elementToMark =
+                document.getElementsByClassName(elementClassToMark)[0];
 
             if (elementToMark) {
                 ProductSelector.config.products.elementsToMark?.forEach((element) => {
-                    document.getElementsByClassName(element)[0]?.classList.remove("selected")
-                })
-                elementToMark.classList.add("selected")
+                    document
+                        .getElementsByClassName(element)[0]
+                        ?.classList.remove("selected");
+                });
+                elementToMark.classList.add("selected");
             }
 
-            console.log("ProductSelector: Successfully selected product:", ProductSelector.state.product_selected)
+            console.log(
+                "ProductSelector: Successfully selected product:",
+                ProductSelector.state.product_selected
+            );
         },
         checkout: async () => {
-            if (!ProductSelector.state.product_selected) throw new Error("ProductSelector: No product selected")
+            if (!ProductSelector.state.product_selected)
+                throw new Error("ProductSelector: No product selected");
 
-            ProductSelector._.setLoading()
+            ProductSelector._.setLoading();
 
-            ProductSelector._.trackAddToCart(ProductSelector.state.product_selected)
+            ProductSelector._.trackAddToCart(ProductSelector.state.product_selected);
 
-            await TrafiCheckout.checkout.buyNow(ProductSelector.state.product_selected)
+            if (ProductSelector.state.product_selected.extra_products) {
+                const extraProducts =
+                    ProductSelector.state.product_selected.extra_products
+                        .map((slug) => {
+                            if (ProductSelector.state.extra_products[slug]) {
+                                return {
+                                    product: ProductSelector.state.extra_products[slug],
+                                    variant:
+                                        ProductSelector.state.extra_products[slug]
+                                            .variations_definition.product_variations[0],
+                                    quantity: 1,
+                                };
+                            }
+                            return undefined;
+                        })
+                        .filter((product) => Boolean(product));
 
+                const items = [
+                    ProductSelector.state.product_selected,
+                    ...extraProducts,
+                ];
+
+                await TrafiCheckout.checkout.buyNow(items);
+                return;
+            }
+
+            await TrafiCheckout.checkout.buyNow(
+                ProductSelector.state.product_selected
+            );
         },
         setupTriggers: () => {
-
             ProductSelector.config.products.triggers.forEach((trigger) => {
-                document.getElementsByClassName(trigger)[0]?.removeEventListener("click", () => { })
-                document.getElementsByClassName(trigger)[0]?.addEventListener("click", (event) => {
-                    event.preventDefault()
-                    ProductSelector._.onSelect(trigger)
-                    if (!ProductSelector.config.triggered_by) {
-                        ProductSelector._.checkout()
-                    }
-                })
-            })
+                document
+                    .getElementsByClassName(trigger)[0]
+                    ?.removeEventListener("click", () => { });
+                document
+                    .getElementsByClassName(trigger)[0]
+                    ?.addEventListener("click", (event) => {
+                        event.preventDefault();
+                        ProductSelector._.onSelect(trigger);
+                        if (!ProductSelector.config.triggered_by) {
+                            ProductSelector._.checkout();
+                        }
+                    });
+            });
 
             if (ProductSelector.config.triggered_by) {
-                const triggeredBy = document.getElementsByClassName(ProductSelector.config.triggered_by)[0]
-                triggeredBy?.removeEventListener("click", () => { })
+                const triggeredBy = document.getElementsByClassName(
+                    ProductSelector.config.triggered_by
+                )[0];
+                triggeredBy?.removeEventListener("click", () => { });
                 triggeredBy?.addEventListener("click", (event) => {
-                    event.preventDefault()
-                    ProductSelector._.checkout()
-
-                })
+                    event.preventDefault();
+                    ProductSelector._.checkout();
+                });
             }
-            console.log("ProductSelector: Successfully setup triggers")
-        }
+            console.log("ProductSelector: Successfully setup triggers");
+        },
     },
     init: async ({ base, ...configOverride }) => {
-        if (!base) throw new Error("ProductSelector: base is required")
+        if (!base) throw new Error("ProductSelector: base is required");
 
-        if (!TrafiCheckout || !TrafiProducts) throw new Error("ProductSelector: TrafiCheckout & and TrafiProducts dependencies are required")
+        if (!TrafiCheckout || !TrafiProducts)
+            throw new Error(
+                "ProductSelector: TrafiCheckout & and TrafiProducts dependencies are required"
+            );
 
-        TrafiCheckout.init(base)
-        TrafiProducts.init(base)
+        TrafiCheckout.init(base);
+        TrafiProducts.init(base);
 
-        ProductSelector.config = { ...ProductSelector.config, ...configOverride }
+        ProductSelector.config = { ...ProductSelector.config, ...configOverride };
 
-        await ProductSelector._.fetchProducts()
+        await ProductSelector._.fetchProducts();
 
-        ProductSelector._.setupTriggers()
+        ProductSelector._.setupTriggers();
 
         if (typeof ProductSelector.config.default_selected === "number") {
-            ProductSelector._.onSelect(ProductSelector.config.products.triggers[ProductSelector.config.default_selected])
+            ProductSelector._.onSelect(
+                ProductSelector.config.products.triggers[
+                ProductSelector.config.default_selected
+                ]
+            );
         }
 
-        console.log("ProductSelector: Successfully set config")
+        console.log("ProductSelector: Successfully set config");
     },
     checkout: () => ProductSelector._.checkout(),
-}
+};

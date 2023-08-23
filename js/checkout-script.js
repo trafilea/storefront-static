@@ -155,7 +155,7 @@ const TrafiCheckout = {
             window.location.assign(hc_url);
         },
         buyNow: async (item) => {
-            const cart = await TrafiCheckout.cart.create(TrafiCheckout.cart.buildFromItems([item]))
+            const cart = await TrafiCheckout.cart.create(TrafiCheckout.cart.buildFromItems(Array.isArray(item) ? item : [item]))
             TrafiCheckout.checkout.redirect(cart.token)
         },
         start: async (cart) => {
