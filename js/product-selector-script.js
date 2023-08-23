@@ -124,6 +124,10 @@ const ProductSelector = {
                                 </div>`;
 
             document.body.appendChild(loading);
+
+            window.addEventListener("pageshow", function() {
+               document.body.removeChild(loading);
+            }, false);
         },
         trackAddToCart: ({ product, variant, quantity }) => {
             window.dataLayer = window.dataLayer || [];
