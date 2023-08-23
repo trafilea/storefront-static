@@ -164,20 +164,22 @@ const ProductSelector = {
 
             const extraProductsSlugs = [
                 ...new Set(
-                    ProductSelector.config.products.extra_products.flatMap(
+                    ProductSelector.config.products.extra_products?.flatMap(
                         (product) => product
                     )
                 ),
             ];
-            const extraProducts = await TrafiProducts.bySlug.getProducts(
-                extraProductsSlugs
-            );
-            const extraProductsMap = extraProducts.reduce((acc, product) => {
-                acc[product.slug] = product;
-                return acc;
-            }, {});
+            if (extraProductsSlugs.length > 0) {
+                const extraProducts = await TrafiProducts.bySlug.getProducts(
+                    extraProductsSlugs
+                );
+                const extraProductsMap = extraProducts.reduce((acc, product) => {
+                    acc[product.slug] = product;
+                    return acc;
+                }, {});
 
-            ProductSelector.state.extra_products = extraProductsMap;
+                ProductSelector.state.extra_products = extraProductsMap;
+            }
 
             console.log("ProductSelector: Successfully fetched Products");
         },
@@ -237,20 +239,33 @@ const ProductSelector = {
 
             if (ProductSelector.state.product_selected.extra_products) {
                 const extraProducts =
-                    ProductSelector.state.product_selected.extra_products.map(
-                        (slug) => ProductSelector.state.extra_products[slug]
-                    ).filter((product) => Boolean(product));
+                    ProductSelector.state.product_selected.extra_products
+                        .map((slug) => {
+                            if (ProductSelector.state.extra_products[slug]) {
+                                return {
+                                    product: ProductSelector.state.extra_products[slug],
+                                    variant:
+                                        ProductSelector.state.extra_products[slug]
+                                            .variations_definition.product_variations[0],
+                                    quantity: 1,
+                                };
+                            }
+                            return undefined;
+                        })
+                        .filter((product) => Boolean(product));
 
                 const items = [
-                    ProductSelector.state.product_selected.product,
+                    ProductSelector.state.product_selected,
                     ...extraProducts,
                 ];
 
                 await TrafiCheckout.checkout.buyNow(items);
-                return
+                return;
             }
 
-            await TrafiCheckout.checkout.buyNow(ProductSelector.state.product_selected);
+            await TrafiCheckout.checkout.buyNow(
+                ProductSelector.state.product_selected
+            );
         },
         setupTriggers: () => {
             ProductSelector.config.products.triggers.forEach((trigger) => {
