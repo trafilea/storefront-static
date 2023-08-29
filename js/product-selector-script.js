@@ -208,7 +208,7 @@ const ProductSelector = {
 
             if (ProductSelector.config.image_selector) {
                 const newImage =
-                    ProductSelector.state.product_selected.variant.images[0].src;
+                    ProductSelector.state.product_selected.product.images[0].src;
                 document.getElementsByClassName(
                     ProductSelector.config.image_selector
                 )[0].src = newImage;
