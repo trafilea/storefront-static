@@ -125,8 +125,8 @@ const ProductSelector = {
 
             document.body.appendChild(loading);
 
-            window.addEventListener("pageshow", function() {
-               document.body.removeChild(loading);
+            window.addEventListener("pageshow", function () {
+                document.body.removeChild(loading);
             }, false);
         },
         trackAddToCart: ({ product, variant, quantity }) => {
@@ -233,33 +233,40 @@ const ProductSelector = {
                 ProductSelector.state.product_selected
             );
         },
+        getQuantity: () => { },
         checkout: async () => {
             if (!ProductSelector.state.product_selected)
                 throw new Error("ProductSelector: No product selected");
 
             ProductSelector._.setLoading();
 
-            ProductSelector._.trackAddToCart(ProductSelector.state.product_selected);
+            const quantity = typeof ProductSelector.state.product_selected.quantity === "function" ? ProductSelector.state.product_selected.quantity() : ProductSelector.state.product_selected.quantity;
 
-            if (ProductSelector.state.product_selected.extra_products) {
-                const extraProducts =
-                    ProductSelector.state.product_selected.extra_products
-                        .map((slug) => {
-                            if (ProductSelector.state.extra_products[slug]) {
-                                return {
-                                    product: ProductSelector.state.extra_products[slug],
-                                    variant:
-                                        ProductSelector.state.extra_products[slug]
-                                            .variations_definition.product_variations[0],
-                                    quantity: 1,
-                                };
-                            }
-                            return undefined;
-                        })
-                        .filter((product) => Boolean(product));
+            const productSelected = {
+                ...ProductSelector.state.product_selected,
+                quantity,
+            }
+
+            ProductSelector._.trackAddToCart(productSelected);
+
+            if (productSelected.extra_products) {
+                const extraProducts = productSelected.extra_products
+                    .map((slug) => {
+                        if (ProductSelector.state.extra_products[slug]) {
+                            return {
+                                product: ProductSelector.state.extra_products[slug],
+                                variant:
+                                    ProductSelector.state.extra_products[slug]
+                                        .variations_definition.product_variations[0],
+                                quantity: 1,
+                            };
+                        }
+                        return undefined;
+                    })
+                    .filter((product) => Boolean(product));
 
                 const items = [
-                    ProductSelector.state.product_selected,
+                    productSelected,
                     ...extraProducts,
                 ];
 
@@ -268,7 +275,7 @@ const ProductSelector = {
             }
 
             await TrafiCheckout.checkout.buyNow(
-                ProductSelector.state.product_selected
+                productSelected
             );
         },
         setupTriggers: () => {
