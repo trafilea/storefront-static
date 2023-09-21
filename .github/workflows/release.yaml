@@ -1,0 +1,16 @@
+name: Release
+on:
+  release:
+    types: [published]
+
+
+jobs:
+  upload_package:
+    name: Build
+    uses: trafilea/trafilea-reusable-workflows/.github/workflows/upload-storefront-static.yaml@feature/cdn-workflows
+    if: github.ref == 'refs/heads/main'
+    with:
+      BUILDS_BUCKET: traf-core-builds
+      PACKAGE_NAME: storefront-static
+      PACKAGE_VERSION: ${{ github.ref_name }}
+    secrets: inherit
