@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+    <title>circle solid minus</title>
+    <path fillRule="evenodd" clipRule="evenodd"
+        d="M20 1C9.50659 1 1 9.50659 1 20C1 30.4934 9.50659 39 20 39C30.4934 39 39 30.4934 39 20C39 9.50659 30.4934 1 20 1ZM11 20.5C11 21.3284 11.6716 22 12.5 22H27.5C28.3284 22 29 21.3284 29 20.5C29 19.6716 28.3284 19 27.5 19H12.5C11.6716 19 11 19.6716 11 20.5Z"
+        fill="currentColor" />
+</svg>
