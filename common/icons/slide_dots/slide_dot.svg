@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" testId="" fill="none">
+  <title>Slide dot</title>
+  <g opacity="none">
+    <circle cx="8" cy="8" r="7.5" stroke="#292929" fill="none" />
+  </g>
+</svg>
