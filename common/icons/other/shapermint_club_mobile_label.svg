@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 345 62" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 345 62" fill="none"
+  id="shapermint_club_mobile_label">
   <title>ShapermintClubMobileLabel</title>
   <path d="M0 0H345V42C345 53.0457 336.046 62 325 62H20C8.9543 62 0 53.0457 0 42V0Z" fill="#FDF1EF" />
   <g clipPath="url(#clip0_246_7477)">
