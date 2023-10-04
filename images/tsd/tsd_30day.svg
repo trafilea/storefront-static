@@ -72,8 +72,8 @@
             fill="#457A41" />
     </g>
     <defs>
-        <clipPath id="clip0_3014_15880">
+        <clip-path id="clip0_3014_15880">
             <rect width="126" height="110" fill="white" transform="translate(0 0.5)" />
-        </clipPath>
+        </clip-path>
     </defs>
 </svg>
