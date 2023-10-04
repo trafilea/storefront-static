@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 30 31" testId="" fill="none"
   id="money_flow">
   <title>MoneyFlow</title>
-  <g clipPath="url(#clip0_64_5227)">
+  <g clip-path="url(#clip0_64_5227)">
     <path
       d="M15.0302 30.8361C6.74198 30.8361 0 24.0933 0 15.8059C0 7.51859 6.74198 0.77478 15.0302 0.77478C23.3185 0.77478 30.0614 7.51765 30.0614 15.8059C30.0614 24.0942 23.3185 30.8361 15.0302 30.8361ZM15.0302 1.14229C6.945 1.14229 0.3675 7.72072 0.3675 15.8059C0.3675 23.8911 6.945 30.4686 15.0302 30.4686C23.1154 30.4686 29.6939 23.8911 29.6939 15.8059C29.6939 7.72072 23.1154 1.14229 15.0302 1.14229Z"
       fill="currentColor" />
@@ -20,8 +20,8 @@
       fill="currentColor" />
   </g>
   <defs>
-    <clipPath id="clip0_64_5227">
+    <clip-path id="clip0_64_5227">
       <rect width="30" height="30" fill="white" transform="translate(0 0.77478)" />
-    </clipPath>
+    </clip-path>
   </defs>
 </svg>
