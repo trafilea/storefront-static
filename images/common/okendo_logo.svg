@@ -50,8 +50,8 @@
             fill="black" />
     </g>
     <defs>
-        <clipPath id="clip0_303_43">
+        <clip-path id="clip0_303_43">
             <rect width="935" height="202" fill="white" />
-        </clipPath>
+        </clip-path>
     </defs>
 </svg>

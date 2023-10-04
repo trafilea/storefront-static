@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 345 26"
   id="shapermint_club_icon">
   <title>ShapermintClubIcon</title>
-  <g clipPath="url(#clip0_246_7947)">
+  <g clip-path="url(#clip0_246_7947)">
     <path
       d="M193.143 5.00589C194.528 5.00589 195.65 3.88529 195.65 2.50295C195.65 1.12061 194.528 0 193.143 0C191.759 0 190.636 1.12061 190.636 2.50295C190.636 3.88529 191.759 5.00589 193.143 5.00589Z"
       fill="#292929" />
@@ -45,8 +45,8 @@
     <path d="M242.616 20.687H240.799H238.983V13.6635V1.09766H240.799H242.616V13.6635V20.687Z" fill="#882A2B" />
   </g>
   <defs>
-    <clipPath id="clip0_246_7947">
+    <clip-path id="clip0_246_7947">
       <rect width="205" height="26" fill="white" transform="translate(70)" />
-    </clipPath>
+    </clip-path>
   </defs>
 </svg>
