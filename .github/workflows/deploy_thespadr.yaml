@@ -15,7 +15,7 @@ jobs:
       PACKAGE_NAME: storefront-static
       PACKAGE_VERSION: ${{ inputs.package-version }}
       CDN_BUCKET: cdn-dev.thespadr.com
-      CLOUDFRONT_ID: 	E15PBGXLUO0D7A
+      CLOUDFRONT_ID: E15PBGXLUO0D7A
       ENVIRONMENT_ACCOUNT_ID: 571168450468
     secrets: inherit
   
