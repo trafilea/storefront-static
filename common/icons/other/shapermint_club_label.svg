@@ -2,7 +2,7 @@
   id="shapermint_club_label">
   <title>ShapermintClubLabel</title>
   <rect width="740" height="60" transform="translate(-22.4999)" fill="#FDF1EF" />
-  <g clipPath="url(#clip0_246_8254)">
+  <g clip-path="url(#clip0_246_8254)">
     <path
       d="M371.063 20.776C372.644 20.776 373.925 19.483 373.925 17.888C373.925 16.293 372.644 15 371.063 15C369.483 15 368.202 16.293 368.202 17.888C368.202 19.483 369.483 20.776 371.063 20.776Z"
       fill="#292929" />
@@ -46,8 +46,8 @@
     <path d="M427.534 38.8692H425.461H423.388V30.7651V16.2661H425.461H427.534V30.7651V38.8692Z" fill="#882A2B" />
   </g>
   <defs>
-    <clipPath id="clip0_246_8254">
+    <clip-path id="clip0_246_8254">
       <rect width="234" height="30" fill="white" transform="translate(230.5 15)" />
-    </clipPath>
+    </clip-path>
   </defs>
 </svg>

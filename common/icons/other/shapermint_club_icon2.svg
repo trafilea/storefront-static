@@ -20,8 +20,8 @@
     fill="#882A2B" />
   <path d="M52.6702 21.1187H50.857H49.0437V14.0951V1.5293H50.857H52.6702V14.0951V21.1187Z" fill="#882A2B" />
   <defs>
-    <clipPath id="clip0_246_7947">
+    <clip-path id="clip0_246_7947">
       <rect width="205" height="26" fill="white" transform="translate(70)" />
-    </clipPath>
+    </clip-path>
   </defs>
 </svg>

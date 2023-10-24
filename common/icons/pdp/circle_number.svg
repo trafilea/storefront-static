@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 40 40" id="circle_number">
   <title>Shipping empty</title>
-  <path fillRule="evenodd" clipRule="evenodd"
+  <path fill-rule="evenodd" clip-rule="evenodd"
     d="M1 20C1 9.50659 9.50659 1 20 1C30.4934 1 39 9.50659 39 20C39 30.4934 30.4934 39 20 39C9.50659 39 1 30.4934 1 20Z"
     fill="#292929" />
   <path d="M21.9593 28V11.008H19.8713L15.0473 14.92L16.4153 16.528L19.6313 13.84V28H21.9593Z" fill="white" />

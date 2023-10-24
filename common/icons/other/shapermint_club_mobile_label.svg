@@ -2,7 +2,7 @@
   id="shapermint_club_mobile_label">
   <title>ShapermintClubMobileLabel</title>
   <path d="M0 0H345V42C345 53.0457 336.046 62 325 62H20C8.9543 62 0 53.0457 0 42V0Z" fill="#FDF1EF" />
-  <g clipPath="url(#clip0_246_7477)">
+  <g clip-path="url(#clip0_246_7477)">
     <path
       d="M196.567 21.1611C198.181 21.1611 199.49 19.7819 199.49 18.0806C199.49 16.3792 198.181 15 196.567 15C194.953 15 193.644 16.3792 193.644 18.0806C193.644 19.7819 194.953 21.1611 196.567 21.1611Z"
       fill="#292929" />
@@ -46,8 +46,8 @@
     <path d="M254.244 40.4607H252.127H250.01V31.8163V16.3506H252.127H254.244V31.8163V40.4607Z" fill="#882A2B" />
   </g>
   <defs>
-    <clipPath id="clip0_246_7477">
+    <clip-path id="clip0_246_7477">
       <rect width="239" height="32" fill="white" transform="translate(53 15)" />
-    </clipPath>
+    </clip-path>
   </defs>
 </svg>

@@ -9,11 +9,11 @@
         </g>
     </g>
     <defs>
-        <clipPath id="clip0_20_415">
+        <clip-path id="clip0_20_415">
             <rect width="64" height="64" rx="32" fill="white" />
-        </clipPath>
-        <clipPath id="clip1_20_415">
+        </clip-path>
+        <clip-path id="clip1_20_415">
             <rect width="37.6471" height="37.6471" fill="white" transform="translate(13.5529 13.5529)" />
-        </clipPath>
+        </clip-path>
     </defs>
 </svg>
