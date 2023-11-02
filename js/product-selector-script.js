@@ -215,7 +215,7 @@ const ProductSelector = {
           ProductSelector.state.product_selected.product.images[0].src;
         document
           .getElementsByClassName(ProductSelector.config.image_selector)
-          .forEach((imageElement) => (imageElement.src = newImage));
+          ?.forEach((imageElement) => (imageElement.src = newImage));
       }
 
       const elementClassToMark =
@@ -228,9 +228,9 @@ const ProductSelector = {
         ProductSelector.config.products.elementsToMark?.forEach((element) => {
           document
             .getElementsByClassName(element)
-            .forEach((element) => element.classList.remove("selected"));
+            ?.forEach((element) => element.classList.remove("selected"));
         });
-        elementsToMark.forEach((element) => element.classList.add("selected"));
+        elementsToMark?.forEach((element) => element.classList.add("selected"));
       }
 
       console.log(
@@ -282,12 +282,12 @@ const ProductSelector = {
       await TrafiCheckout.checkout.buyNow(productSelected);
     },
     setupTriggers: () => {
-      ProductSelector.config.products.triggers.forEach((trigger) => {
-        document.getElementsByClassName(trigger).forEach((element) => {
+      ProductSelector.config.products.triggers?.forEach((trigger) => {
+        document.getElementsByClassName(trigger)?.forEach((element) => {
           element.removeEventListener("click", () => {});
         });
 
-        document.getElementsByClassName(trigger).forEach((element) => {
+        document.getElementsByClassName(trigger)?.forEach((element) => {
           element.addEventListener("click", (event) => {
             event.preventDefault();
             ProductSelector._.onSelect(trigger);
@@ -303,11 +303,11 @@ const ProductSelector = {
           ProductSelector.config.triggered_by
         );
 
-        triggeredBy.forEach((element) => {
+        triggeredBy?.forEach((element) => {
           element.removeEventListener("click", () => {});
         });
 
-        triggeredBy.forEach((element) => {
+        triggeredBy?.forEach((element) => {
           element.addEventListener("click", (event) => {
             event.preventDefault();
             ProductSelector._.checkout();
