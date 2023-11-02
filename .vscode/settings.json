@@ -1,0 +1,23 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.validate.enable": true,
+  "javascript.validate.enable": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.format.enable": true,
+  "editor.maxTokenizationLineLength": 99999999,
+  "editor.codeActionsOnSave": [
+    "source.addMissingImports",
+    "source.formatDocument",
+    "source.organizeImports",
+    "source.fixAll",
+    "source.fixAll.eslint"
+  ],
+  "editor.formatOnSave": true,
+  "cSpell.words": ["trafilea"]
+}
