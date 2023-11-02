@@ -17,6 +17,15 @@ const ProductSelector = {
     extra_products: {},
   },
   _: {
+    forEachElement: (className, callback) => {
+      const array = document.getElementsByClassName(className);
+
+      if (array?.length) {
+        array.forEach((element) => {
+          callback(element);
+        });
+      }
+    },
     setLoading: () => {
       const loading = document.createElement("div");
       loading.innerHTML = `
@@ -213,25 +222,25 @@ const ProductSelector = {
       if (ProductSelector.config.image_selector) {
         const newImage =
           ProductSelector.state.product_selected.product.images[0].src;
-        document
-          .getElementsByClassName(ProductSelector.config.image_selector)
-          ?.forEach((imageElement) => (imageElement.src = newImage));
+
+        ProductSelector._.forEachElement(
+          ProductSelector.config.image_selector,
+          (imageElement) => (imageElement.src = newImage)
+        );
       }
 
       const elementClassToMark =
         ProductSelector.config.products.elementsToMark[index];
 
-      const elementsToMark =
-        document.getElementsByClassName(elementClassToMark);
+      ProductSelector.config.products.elementsToMark?.forEach((element) => {
+        ProductSelector._.forEachElement(element, (element) =>
+          element.classList.remove("selected")
+        );
+      });
 
-      if (elementsToMark?.length) {
-        ProductSelector.config.products.elementsToMark?.forEach((element) => {
-          document
-            .getElementsByClassName(element)
-            ?.forEach((element) => element.classList.remove("selected"));
-        });
-        elementsToMark?.forEach((element) => element.classList.add("selected"));
-      }
+      ProductSelector._.forEachElement(elementClassToMark, (element) =>
+        element.classList.add("selected")
+      );
 
       console.log(
         "ProductSelector: Successfully selected product:",
@@ -283,11 +292,11 @@ const ProductSelector = {
     },
     setupTriggers: () => {
       ProductSelector.config.products.triggers?.forEach((trigger) => {
-        document.getElementsByClassName(trigger)?.forEach((element) => {
+        ProductSelector._.forEachElement(trigger, (element) => {
           element.removeEventListener("click", () => {});
         });
 
-        document.getElementsByClassName(trigger)?.forEach((element) => {
+        ProductSelector._.forEachElement(trigger, (element) => {
           element.addEventListener("click", (event) => {
             event.preventDefault();
             ProductSelector._.onSelect(trigger);
@@ -299,20 +308,17 @@ const ProductSelector = {
       });
 
       if (ProductSelector.config.triggered_by) {
-        const triggeredBy = document.getElementsByClassName(
-          ProductSelector.config.triggered_by
+        ProductSelector._.forEachElement(
+          ProductSelector.config.triggered_by,
+          (element) => {
+            element.removeEventListener("click", () => {});
+
+            element.addEventListener("click", (event) => {
+              event.preventDefault();
+              ProductSelector._.checkout();
+            });
+          }
         );
-
-        triggeredBy?.forEach((element) => {
-          element.removeEventListener("click", () => {});
-        });
-
-        triggeredBy?.forEach((element) => {
-          element.addEventListener("click", (event) => {
-            event.preventDefault();
-            ProductSelector._.checkout();
-          });
-        });
       }
 
       console.log("ProductSelector: Successfully setup triggers");
