@@ -21,7 +21,7 @@ const ProductSelector = {
       const array = document.getElementsByClassName(className);
 
       if (array?.length) {
-        array.forEach((element) => {
+        Array.prototype.forEach.call(array, (element) => {
           callback(element);
         });
       }
