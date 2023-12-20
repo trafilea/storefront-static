@@ -88,11 +88,11 @@ const TrafiCheckout = {
 
       const payload = TrafiCheckout._.generatePayload(cart);
 
+      const controller = new AbortController();
+
+      setTimeout(() => controller.abort(), 6000);
+
       try {
-        const controller = new AbortController();
-
-        setTimeout(() => controller.abort(), 6000);
-
         const cartResponse = await fetch(url, {
           signal: controller.signal,
           method: "POST",
@@ -101,15 +101,42 @@ const TrafiCheckout = {
           },
           body: JSON.stringify(payload),
         });
+
         if (cartResponse.status !== 200) throw new Error(cartResponse);
 
         return cartResponse.json();
       } catch (error) {
+        if (controller.signal.aborted) {
+          console.warn("Retrying HC Create/Update Cart after 6000ms timeout");
+
+          const retryController = new AbortController();
+
+          setTimeout(() => retryController.abort(), 6000);
+
+          const cartResponse = await fetch(url, {
+            signal: retryController.signal,
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+
+          if (cartResponse.status !== 200) throw new Error(cartResponse);
+
+          return cartResponse.json();
+        }
+
         if (error.status >= 500) {
           //TODO retry
-          console.log("Gateway error");
+          console.error("Error Hitting HC Create/Update: Gateway error");
         }
-        console.log("Error Hitting HC Create/Update Cart:", error);
+
+        console.error(
+          "Error Hitting HC Create/Update Cart:",
+          JSON.stringify(error)
+        );
+
         throw error;
       }
     },

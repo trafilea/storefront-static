@@ -39,41 +39,49 @@ const TrafiProducts = {
         .replace("{environment}", TrafiProducts.config.environment)
         .concat(`/${productId}`),
     baseQuery: async (product_id, byVendor) => {
-      if (!product_id) throw new Error("Product ID is required");
+      try {
+        if (!product_id) throw new Error("Product ID is required");
 
-      const url = byVendor
-        ? TrafiProducts._.buildByVendorUrl(product_id)
-        : TrafiProducts._.buildTrafiUrl(product_id);
+        const url = byVendor
+          ? TrafiProducts._.buildByVendorUrl(product_id)
+          : TrafiProducts._.buildTrafiUrl(product_id);
 
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-        },
-      });
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+          },
+        });
 
-      return response.json();
+        return response.json();
+      } catch (error) {
+        console.error("TrafiProducts: baseQuery Error", JSON.stringify(error));
+      }
     },
     slugQuery: async (slug) => {
-      if (!slug) throw new Error("Slug is required");
+      try {
+        if (!slug) throw new Error("Slug is required");
 
-      const url = TrafiProducts.config.api_by_trafi
-        .replace("{environment}", TrafiProducts.config.environment)
-        .concat(`?slug=${slug}&store=${TrafiProducts.config.store}`);
+        const url = TrafiProducts.config.api_by_trafi
+          .replace("{environment}", TrafiProducts.config.environment)
+          .concat(`?slug=${slug}&store=${TrafiProducts.config.store}`);
 
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-        },
-      });
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+          },
+        });
 
-      const responseJson = await response.json();
+        const responseJson = await response.json();
 
-      if (responseJson.status_code === 404)
-        throw new Error(responseJson.message);
+        if (responseJson.status_code === 404)
+          throw new Error(responseJson.message);
 
-      return responseJson;
+        return responseJson;
+      } catch (error) {
+        console.error("TrafiProducts: slugQuery Error", JSON.stringify(error));
+      }
     },
     multipleQuery: (product_ids, byVendor) => {
       if (!product_ids?.length) throw new Error("Product IDs are required");
