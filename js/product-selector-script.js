@@ -174,10 +174,13 @@ const ProductSelector = {
     },
     fetchProducts: async () => {
       const products = await TrafiProducts.bySlug.getProducts(
-        ProductSelector.config.products.slugs
+        ...new Set(ProductSelector.config.products.slugs)
       );
 
-      ProductSelector.state.products = products;
+      ProductSelector.state.products = products.reduce((acc, product) => {
+        acc[product.slug] = product;
+        return acc;
+      }, {});
 
       const extraProductsSlugs = [
         ...new Set(
@@ -202,7 +205,8 @@ const ProductSelector = {
     },
     onSelect: (trigger) => {
       const index = ProductSelector.config.products.triggers.indexOf(trigger);
-      const product = ProductSelector.state.products[index];
+      const slug = ProductSelector.config.products.slugs[index];
+      const product = ProductSelector.state.products[slug];
 
       if (!product) {
         throw new Error(
