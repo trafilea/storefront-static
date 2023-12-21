@@ -173,9 +173,9 @@ const ProductSelector = {
       });
     },
     fetchProducts: async () => {
-      const products = await TrafiProducts.bySlug.getProducts(
-        ...new Set(ProductSelector.config.products.slugs)
-      );
+      const products = await TrafiProducts.bySlug.getProducts([
+        ...new Set(ProductSelector.config.products.slugs),
+      ]);
 
       ProductSelector.state.products = products.reduce((acc, product) => {
         acc[product.slug] = product;
