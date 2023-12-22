@@ -1,4 +1,4 @@
-let defaultConfig = {
+let defaultPopupConfig = {
   name: "TrafiPopup",
   triggered_by: ".openPopup",
   title: "CONGRATULATIONS!",
@@ -24,8 +24,8 @@ let defaultConfig = {
   },
 };
 
-const TrafiPopup = (overrideConfig = defaultConfig) => {
-  const config = { ...(defaultConfig ?? {}), ...overrideConfig };
+const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
+  const config = { ...(defaultPopupConfig ?? {}), ...overrideConfig };
   const forEachElement = (trigger, callback) => {
     const array = document.querySelectorAll(trigger);
 
