@@ -80,7 +80,7 @@ const TrafiProducts = {
 
         return responseJson;
       } catch (error) {
-        console.error("TrafiProducts: slugQuery Error", JSON.stringify(error));
+        console.error("TrafiProducts: slugQuery ERROR:", JSON.stringify(error));
       }
     },
     multipleQuery: (product_ids, byVendor) => {
