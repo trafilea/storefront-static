@@ -229,7 +229,10 @@ const ProductSelector = {
 
         ProductSelector._.forEachElement(
           ProductSelector.config.image_selector,
-          (imageElement) => (imageElement.src = newImage)
+          (imageElement) => {
+            imageElement.src = newImage;
+            imageElement.srcset = newImage;
+          }
         );
       }
 

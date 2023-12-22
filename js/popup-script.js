@@ -73,9 +73,10 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
 
                             .popup .content {
                               max-height: 30%;
-                              overflow: auto;
+                              overflow: unset;
                             }
                             .pp_buttons {
+                              width: 100%;
                               display: flex;
                               flex-direction: column;
                               gap: 16px;
@@ -101,6 +102,7 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
                             }
 
                             .pp_decline {
+                              border-width: 1px;
                               background: white;
                               border: 1px solid #FFC700;
                             }
@@ -145,7 +147,7 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
                               position: relative;
                               bottom: 250px;
                               margin-bottom: -40px;
-                              left: 40%;
+                              float: right;
                             }
 
                             .css-nnhxy {
