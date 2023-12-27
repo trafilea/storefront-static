@@ -41,6 +41,7 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
     popup.innerHTML = `
                             <style>
                             .loading-overlay {
+                              overflow: auto;
                               position: fixed;
                               top: 0;
                               bottom: 0;
@@ -54,7 +55,8 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
                             }
 
                             .popup {
-                              margin: 20% auto;
+                              margin: auto;
+                              margin-top: 10%;
                               padding: 20px;
                               background: #fff;
                               border-radius: 5px;
