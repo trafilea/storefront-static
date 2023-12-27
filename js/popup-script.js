@@ -141,6 +141,7 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
                               font-size: 14px;
                               line-height: 22px;
                               font-weight: 400;
+                              margin-bottom: 0px;
                               color: ${config.accent_color};
                             }
 
@@ -154,8 +155,8 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
 
                             .css-141nkgt {
                               position: relative;
-                              bottom: 280px;
-                              margin-bottom: -40px;
+                              top: 16px;
+                              margin-bottom: -80px;
                               float: right;
                             }
 
@@ -189,8 +190,8 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
                                 <div class="content">
                                     <h2 class="pp_title">${config.title}</h2>
                                     <h3 class="pp_subtitle">${config.subtitle}</h2>
-                                    <img class="pp_image" src="${config.image}" alt="Popup Image" />
                                     <div class="css-141nkgt"><div class="css-nnhxy"><div class="css-vgmnak">${config.compare_at_price}</div><div class="css-101f6se">${config.price}</div></div></div>
+                                    <img class="pp_image" src="${config.image}" alt="Popup Image" />
                                     <div class="pp_buttons">
                                       <h6 class="pp_label">${config.label}</h6>
                                       <button class="pp_accept ${config.buttons.accept.class}">${config.buttons.accept.text}</button>
