@@ -214,10 +214,7 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
     return popup;
   };
 
-  forEachElement(config.triggered_by, (element) => {
-    element.addEventListener("click", (event) => {
-      event.preventDefault();
-
+  const openPopup = () => {
       const popup = open();
 
       if (config.buttons.accept.onClick) {
@@ -232,7 +229,15 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
         });
       }
 
-      return popup;
+    return popup
+  };
+  
+  forEachElement(config.triggered_by, (element) => {
+    element.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      return openPopup();
+
     });
   });
 
