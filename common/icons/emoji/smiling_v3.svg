@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 22 20" fill="none" id="smiling_v3">
+    <title>Smiling V3</title>
+    <path
+        d="M10.7513 18.3334C15.3537 18.3334 19.0846 14.6025 19.0846 10.0001C19.0846 5.39771 15.3537 1.66675 10.7513 1.66675C6.14893 1.66675 2.41797 5.39771 2.41797 10.0001C2.41797 14.6025 6.14893 18.3334 10.7513 18.3334Z"
+        stroke="#457A41" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+    <path
+        d="M7.41797 11.6667C7.41797 11.6667 8.66797 13.3333 10.7513 13.3333C12.8346 13.3333 14.0846 11.6667 14.0846 11.6667"
+        stroke="#457A41" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M8.25 7.5H8.25833" stroke="#457A41" stroke-width="1.66667" stroke-linecap="round"
+        stroke-linejoin="round" />
+    <path d="M13.25 7.5H13.2583" stroke="#457A41" stroke-width="1.66667" stroke-linecap="round"
+        stroke-linejoin="round" />
+</svg>
