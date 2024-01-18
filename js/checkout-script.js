@@ -90,7 +90,7 @@ const TrafiCheckout = {
 
       const controller = new AbortController();
 
-      setTimeout(() => controller.abort(), 6000);
+      setTimeout(() => controller.abort("Timeout"), 5500);
 
       try {
         const cartResponse = await fetch(url, {
@@ -107,11 +107,11 @@ const TrafiCheckout = {
         return cartResponse.json();
       } catch (error) {
         if (controller.signal.aborted) {
-          console.warn("Retrying HC Create/Update Cart after 6000ms timeout");
+          console.warn("Retrying HC Create/Update Cart after 5500ms timeout");
 
           const retryController = new AbortController();
 
-          setTimeout(() => retryController.abort(), 6000);
+          setTimeout(() => retryController.abort("Retry Timeout"), 6000);
 
           const cartResponse = await fetch(url, {
             signal: retryController.signal,

@@ -39,14 +39,19 @@ const TrafiProducts = {
         .replace("{environment}", TrafiProducts.config.environment)
         .concat(`/${productId}`),
     baseQuery: async (product_id, byVendor) => {
+      if (!product_id) throw new Error("Product ID is required");
+
+      const url = byVendor
+        ? TrafiProducts._.buildByVendorUrl(product_id)
+        : TrafiProducts._.buildTrafiUrl(product_id);
+
+      const controller = new AbortController();
+
+      setTimeout(() => controller.abort("Timeout"), 5500);
+
       try {
-        if (!product_id) throw new Error("Product ID is required");
-
-        const url = byVendor
-          ? TrafiProducts._.buildByVendorUrl(product_id)
-          : TrafiProducts._.buildTrafiUrl(product_id);
-
         const response = await fetch(url, {
+          signal: controller.signal,
           method: "GET",
           headers: {
             "content-type": "application/json",
@@ -55,6 +60,24 @@ const TrafiProducts = {
 
         return response.json();
       } catch (error) {
+        if (controller.signal.aborted) {
+          console.warn("Retrying get product after 5500ms timeout");
+
+          const retryController = new AbortController();
+
+          setTimeout(() => retryController.abort("Retry Timeout"), 6000);
+
+          const response = await fetch(url, {
+            signal: controller.signal,
+            method: "GET",
+            headers: {
+              "content-type": "application/json",
+            },
+          });
+
+          return response.json();
+        }
+
         console.error("TrafiProducts: baseQuery Error", JSON.stringify(error));
       }
     },
