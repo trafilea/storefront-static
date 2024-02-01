@@ -1,0 +1,312 @@
+#reviewsoutside {
+	max-width: none;
+	padding: 0;
+	width: 100%
+}
+
+/* Main title */
+#reviewsoutside .title-comments {
+	color: #292929;
+	font-family: Jost;
+	font-weight: 700;
+	font-size: 42px;
+	margin-bottom: 18px;
+	margin-top: 20px;
+	text-align: center;
+}
+
+@media screen and (max-width: 540px) {
+	#reviewsoutside .title-comments {
+		font-size: 30px;
+	}
+}
+
+#reviewsoutside #stamped-main-widget {
+	margin: 0
+}
+
+#reviewsoutside .stamped-container {
+	max-width: none;
+	margin: 30px auto;
+	border: none;
+	padding: 0
+}
+
+@media screen and (max-width: 768px) {
+	#reviewsoutside .stamped-container {
+		margin: 0 auto
+	}
+}
+
+/* The action where the header buttons are */
+#reviewsoutside .stamped-container .stamped-summary-actions {
+	display: none !important;
+	top: 150px !important;
+	position: absolute;
+	z-index: 3;
+	right: unset;
+	bottom: 0;
+	right: calc(50% - 130px);
+}
+
+/* The action write a review button */
+#reviewsoutside .stamped-container .stamped-summary-actions .stamped-summary-actions-newreview::before {
+	content: '';
+}
+#reviewsoutside .stamped-container .stamped-summary-actions .stamped-summary-actions-newreview{
+	padding: 6px 30px;
+	border: 2px solid #292929;
+	border-radius: 50px;
+	font-family: Jost;
+	font-weight: 500;
+	font-size: 16px;
+	text-transform: uppercase;
+	letter-spacing: 0.2em;
+}
+
+#reviewsoutside .stamped-container .stamped-summary {
+	display: block;
+	width: 695px;
+    margin: auto;
+	/* margin-bottom: 80px; */
+}
+
+#reviewsoutside .stamped-container .stamped-summary .stamped-summary-photos {
+	max-width: 695px !important;
+	clear: both;
+    float: left;
+	width: 100%;
+}
+
+.stamped-photos-carousel {
+	display: flex;
+	justify-content: center;
+}
+
+.stamped-photos-carousel .stamped-photo {
+	width: 135px !important;
+	height: 157px !important;
+	border-radius: 8px !important;
+}
+
+#reviewsoutside .stamped-container .stamped-summary .stamped-summary-photos .stamped-photos-title {
+	display: none !important;
+}
+
+#reviewsoutside .stamped-container .stamped-summary .stamped-summary-ratings {
+	width: unset !important;
+	border-right: none !important;
+	float: right;
+}
+
+/* header rating stars */
+#reviewsoutside .stamped-container .stamped-summary-ratings .summary-rating .summary-rating-title::before {
+	color: #DA9187 !important;
+}
+
+/* the header raiting bar besides the starts */
+#reviewsoutside .stamped-container .stamped-summary-ratings .summary-rating .summary-rating-bar {
+	display: none;
+}
+
+.summary-rating-count:before, .summary-rating-count:after {
+    content: '' !important;
+}
+
+.summary-rating-count {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+@media only screen and (max-width: 480px) {
+	.stamped-header-title, .stamped-summary {
+		display: flex !important;
+		flex-direction: column !important;
+		width: auto !important;
+	}
+
+	#reviewsoutside .stamped-container .stamped-summary .stamped-summary-photos {
+		max-width: 295px !important;
+	}
+
+	.stamped-photos-carousel .stamped-photo {
+		width: 61px !important;
+		height: 77px !important;
+		margin-bottom: 5px !important;
+		margin-right: 5px !important;	
+	}
+}
+
+/* header big rating number */
+#reviewsoutside .stamped-container .stamped-summary .summary-overview .stamped-summary-caption .stamped-summary-text-1 {
+	font-family: Georgia;
+	font-size: 36px;
+	font-weight: 700;
+}
+
+/* header raiting starts under the big raiting number */
+#reviewsoutside .stamped-container .stamped-summary .summary-overview .stamped-starrating .stamped-fa {
+	color: #DA918A !important;
+}
+
+/* Header "based on" review text */
+#reviewsoutside .stamped-container .stamped-summary .summary-overview .stamped-summary-caption .stamped-summary-text {
+	font-size: 18px !important;
+	font-weight: 400;
+	font-family: Jost;
+}
+
+#reviewsoutside .stamped-container .stamped-content {
+	box-sizing: border-box;
+	display: block;
+	margin: 0 auto;
+	max-width: 1100px;
+	padding: 0 20px
+}
+
+@media screen and (max-width: 480px) {
+	#reviewsoutside .stamped-container .stamped-content {
+		padding: 0
+	}
+}
+
+/* the tabs container */
+#reviewsoutside .stamped-container .stamped-content .stamped-tab-container {
+	font-family: Jost;
+	box-sizing: border-box;
+	height: auto;
+	padding: 0 12px;
+	position: relative;
+	font-size: 16px;
+}
+
+#reviewsoutside .stamped-container .stamped-content .stamped-tab-container .stamped-tabs {
+	height: unset;
+	border-bottom: 2px solid #dfdfdf;
+}
+
+/* the tabs */
+#reviewsoutside .stamped-container .stamped-content .stamped-tab-container .stamped-tabs > * {
+	padding: 4px 10px;
+	border-bottom: 4px solid #DA918A;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	font-weight: 600;
+	font-size: 16px;
+}
+#reviewsoutside .stamped-container .stamped-content .stamped-tab-container .stamped-tabs li::after {
+	margin-left: 2px;
+}
+
+#reviewsoutside .stamped-container .stamped-content .stamped-tab-container .stamped-tabs>li:last-child {
+    display: none !important;
+}
+
+/* the select sort button */
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews-filter .stamped-sort-select-wrapper .stamped-sort-select {
+	font-family: Jost;
+	margin-top: 18px;
+	border-radius: 20px;
+	font-weight: 600;
+	font-size: 14px;
+	color: #A6A6A6;
+	padding: 8px 20px!important;
+}
+
+@media only screen and (max-width: 480px) {
+	select#stamped-sort-select {
+		border: 1px solid #BBBBBB !important;
+		margin-right: 10px !important;
+	}
+
+	/* Remove the defaut mobile header title */
+	#reviewsoutside .stamped-container .stamped-header-title {
+		display: none !important;
+	}
+}
+
+/* container of the comments */
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews {
+	padding: 0 12px;
+}
+
+/* each review comment card */
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review {
+	padding: 0 12px;
+	background-color: #F8F8F8 !important;
+	padding: 24px 24px 12px 24px;
+	border-radius: 14px;
+}
+
+/* review card header items */
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-header .stamped-review-avatar {
+	display: none;
+}
+
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-header .author {
+	font-family: Jost;
+	font-weight: 600;
+	font-size: 16px;
+	margin-bottom: 4px;
+}
+
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-header .stamped-verified-badge {
+	color: #E7B8A6;
+	font-family: Jost;
+	font-weight: 600;
+	font-size: 16px;
+}
+
+.stamped-review-header .stamped-verified-badge[data-type=buyer][data-verified-label]:before {
+    content: url(../../images/revel/verified.svg);
+    margin-right: 3px;
+    vertical-align: middle;
+}
+
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-header .stamped-starratings {
+	margin-top: 4px;
+}
+
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-header .stamped-starratings > * {
+	color: #DA918A;
+}
+
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-body .stamped-review-header-title {
+	font-family: Jost;
+	font-weight: 600;
+	font-size: 16px;
+	margin-bottom: 4px;
+	margin-top: 8px;
+}
+
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-body .stamped-review-content-body {
+	font-family: Jost;
+	font-weight: 400;
+	font-size: 16px;
+}
+
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-body .stamped-review-content-body .stamped-review-read-more {
+	color: #292929;
+    font-weight: 500;
+}
+
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-body .stamped-review-footer {
+	display: flex;
+}
+
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-body .stamped-review-footer .stamped-review-share {
+	display: none;
+}
+
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-body .stamped-review-footer .stamped-review-vote .stamped-rating-holder .stamped-thumbs-up .stamped-fa::before, 
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-review .stamped-review-body .stamped-review-footer .stamped-review-vote .stamped-rating-holder .stamped-thumbs-down .stamped-fa::before {
+	font-size: 20px;
+}
+
+#reviewsoutside .stamped-container .stamped-content .stamped-tab-container .stamped-tabs>li:last-child {
+	display: none !important;
+}
+
+#reviewsoutside .stamped-container .stamped-content .stamped-reviews .stamped-pagination li a {
+	color: #292929;
+}
