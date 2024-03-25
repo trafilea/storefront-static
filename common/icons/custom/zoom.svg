@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 50 48" fill="none" testId="zoom"
+    id="zoom">
+    <title>Zoom</title>
+    <g clip-path="url(#clip0_5269_12984)">
+        <path
+            d="M19.1059 36.3715C28.9793 36.3715 36.9833 28.3675 36.9833 18.4941C36.9833 8.62068 28.9793 0.616699 19.1059 0.616699C9.2325 0.616699 1.22852 8.62068 1.22852 18.4941C1.22852 28.3675 9.2325 36.3715 19.1059 36.3715Z"
+            stroke="#333333" stroke-width="1.08764" stroke-linecap="round" stroke-linejoin="round" />
+        <path
+            d="M29.8218 9.83274C27.2987 6.7113 23.437 4.71875 19.1064 4.71875C15.1522 4.71875 11.5928 6.38435 9.08203 9.0493"
+            stroke="#333333" stroke-width="1.08764" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M36.9291 32.1344L32.9277 36.4751L44.7616 47.3836L48.7629 43.0429L36.9291 32.1344Z" stroke="#333333"
+            stroke-width="1.08764" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M31.7266 31.1528L34.774 33.9658" stroke="#333333" stroke-width="1.08764" stroke-linecap="round"
+            stroke-linejoin="round" />
+    </g>
+    <defs>
+        <clipPath id="clip0_5269_12984">
+            <rect width="48.7773" height="48" fill="white" transform="translate(0.611328)" />
+        </clipPath>
+    </defs>
+</svg>
