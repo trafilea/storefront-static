@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 42 42" fill="none" testId="bar"
+    id="bar">
+    <title>Bar</title>
+    <path
+        d="M22.75 7V36.75H17.5V7H22.75ZM35 17.5V36.75H29.75V17.5H35ZM10.5 22.75V36.75H5.25V22.75H10.5ZM24.5 5.25H15.75V38.5H24.5V5.25ZM36.75 15.75H28V38.5H36.75V15.75ZM12.25 21H3.5V38.5H12.25V21Z"
+        fill="black" />
+</svg>
