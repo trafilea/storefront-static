@@ -11,18 +11,14 @@ const VariantSelector = (
       slug: "",
       vendorId: "",
       quantity: 1,
-      color: undefined,
-      size: undefined,
+      attributes_definition: [],
+      attributes: {}
     },
     triggers: {
       buyNow: "",
     },
   }
 ) => {
-  const ATTRIBUTES = {
-    Color: "Color",
-    Size: "Size",
-  };
 
   let state = {
     product: undefined,
@@ -41,108 +37,110 @@ const VariantSelector = (
     setLoading: () => {
       const loading = document.createElement("div");
       loading.innerHTML = `
-                                <style>
-                                .new__loader,
-                                .new__loader:before,
-                                .new__loader:after {
-                                border-radius: 50%;
-                                width: 2.5em;
-                                height: 2.5em;
-                                -webkit-animation-fill-mode: both;
-                                animation-fill-mode: both;
-                                -webkit-animation: load7 1.8s infinite ease-in-out;
-                                animation: load7 1.8s infinite ease-in-out;
-                                }
-                                .new__loader {
-                                color: #000000;
-                                font-size: 10px;
-                                margin: 10px auto 50px;
-                                position: relative;
-                                text-indent: -9999em;
-                                -webkit-transform: translateZ(0);
-                                -ms-transform: translateZ(0);
-                                transform: translateZ(0);
-                                -webkit-animation-delay: -0.16s;
-                                animation-delay: -0.16s;
-                                }
-                                .new__loader:before,
-                                .new__loader:after {
-                                content: '';
-                                position: absolute;
-                                top: 0;
-                                }
-                                .new__loader:before {
-                                left: -3.5em;
-                                -webkit-animation-delay: -0.32s;
-                                animation-delay: -0.32s;
-                                }
-                                .new__loader:after {
-                                left: 3.5em;
-                                }
-                                @-webkit-keyframes load7 {
-                                0%,
-                                80%,
-                                100% {
-                                box-shadow: 0 2.5em 0 -1.3em;
-                                }
-                                40% {
-                                box-shadow: 0 2.5em 0 0;
-                                }
-                                }
-                                @keyframes load7 {
-                                0%,
-                                80%,
-                                100% {
-                                box-shadow: 0 2.5em 0 -1.3em;
-                                }
-                                40% {
-                                box-shadow: 0 2.5em 0 0;
-                                }
-                                }
+        <style>
+          .new__loader,
+          .new__loader:before,
+          .new__loader:after {
+            border-radius: 50%;
+            width: 2.5em;
+            height: 2.5em;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+            -webkit-animation: load7 1.8s infinite ease-in-out;
+            animation: load7 1.8s infinite ease-in-out;
+          }
+          .new__loader {
+            color: #000000;
+            font-size: 10px;
+            margin: 10px auto 50px;
+            position: relative;
+            text-indent: -9999em;
+            -webkit-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-animation-delay: -0.16s;
+            animation-delay: -0.16s;
+          }
+          .new__loader:before,
+          .new__loader:after {
+            content: '';
+            position: absolute;
+            top: 0;
+          }
+          .new__loader:before {
+            left: -3.5em;
+            -webkit-animation-delay: -0.32s;
+            animation-delay: -0.32s;
+          }
+          .new__loader:after {
+            left: 3.5em;
+          }
+          @-webkit-keyframes load7 {
+            0%,
+            80%,
+            100% {
+              box-shadow: 0 2.5em 0 -1.3em;
+            }
+            40% {
+              box-shadow: 0 2.5em 0 0;
+            }
+          }
+          @keyframes load7 {
+            0%,
+            80%,
+            100% {
+              box-shadow: 0 2.5em 0 -1.3em;
+            }
+            40% {
+              box-shadow: 0 2.5em 0 0;
+            }
+          }
 
-                                .loading-overlay {
-                                position: fixed;
-                                top: 0;
-                                bottom: 0;
-                                left: 0;
-                                right: 0;
-                                background: rgba(0, 0, 0, 0.7);
-                                transition: opacity 500ms;
-                                opacity: 1;
-                                z-index: 111;
-                                width: 100%;
-                                }
-                                .popup {
-                                margin: 20% auto;
-                                padding: 40px;
-                                background: #fff;
-                                border-radius: 5px;
-                                width: 30%;
-                                min-width: 300px;
-                                position: relative;
-                                transition: all 5s ease-in-out;
-                                text-align: center;
-                                }
+          .loading-overlay {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            transition: opacity 500ms;
+            opacity: 1;
+            z-index: 111;
+            width: 100%;
+          }
+          .popup {
+            margin: 20% auto;
+            padding: 40px;
+            background: #fff;
+            border-radius: 5px;
+            width: 30%;
+            min-width: 300px;
+            position: relative;
+            transition: all 5s ease-in-out;
+            text-align: center;
+          }
 
-                                .popup h2 {
-                                margin-top: 0;
-                                color: #333;
-                                font-family: Tahoma, Arial, sans-serif;
-                                }
+          .popup h2 {
+            margin-top: 0;
+            color: #333;
+            font-family: Tahoma, Arial, sans-serif;
+          }
 
-                                .popup .content {
-                                max-height: 30%;
-                                overflow: auto;
-                                }
-                                </style>
-                                <div class="loading-overlay">
-                                <div class="popup">
-                                <div class="new__loader"></div>
-                                <div class="content">
-                                    Checking availability...		
-                                </div>
-                                </div>
-                                </div>`;
+          .popup .content {
+            max-height: 30%;
+            overflow: auto;
+          }
+        </style>
+
+        <div class="loading-overlay">
+          <div class="popup">
+            <div class="new__loader"></div>
+            <div class="content">
+                Checking availability...		
+            </div>
+          </div>
+        </div>
+      `;
 
       document.body.appendChild(loading);
 
@@ -240,19 +238,20 @@ const VariantSelector = (
 
     if (!quantity) throw new Error("VariantSelector: No quantity");
 
-    const color =
-      typeof config.product.color === "function"
-        ? config.product.color()
-        : config.product.color;
+    const {attributes_definition, attributes} = config.product;
 
-    if (!color) throw new Error("VariantSelector: No color");
+    const attributesToValue = {}
 
-    const size =
-      typeof config.product.size === "function"
-        ? config.product.size()
-        : config.product.size;
+    attributes_definition.forEach((attributeName) => {
+      const variant = attributes[attributeName]
+      const value = typeof variant === "function" ? variant() : variant;
 
-    if (!size) throw new Error("VariantSelector: No size");
+      if (!value) {
+        throw new Error(`VariantSelector: No ${attribute}`);
+      }
+
+      attributesToValue[attributeName] = value;
+    })
 
     Utils.setLoading();
 
@@ -260,12 +259,9 @@ const VariantSelector = (
       state.product.variations_definition.product_variations.find((variant) => {
         const isTheRightVariant = variant.variation_attributes.every(
           (attribute) => {
-            if (attribute.name === ATTRIBUTES.Color) {
-              return attribute.value === color;
-            }
-            if (attribute.name === ATTRIBUTES.Size) {
-              return attribute.value === size;
-            }
+            const value = attributesToValue[attribute.name]
+
+            if (value) return attribute.value === value;
 
             return false;
           }
