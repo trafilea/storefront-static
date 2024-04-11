@@ -127,7 +127,7 @@ const ProductSelector = {
                                 <div class="popup">
                                 <div class="new__loader"></div>
                                 <div class="content">
-                                    Checking availability...		
+                                    Redirecting to Checkout. Please Wait		
                                 </div>
                                 </div>
                                 </div>`;
