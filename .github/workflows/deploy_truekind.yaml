@@ -15,7 +15,7 @@ jobs:
       PACKAGE_NAME: storefront-static
       PACKAGE_VERSION: ${{ inputs.package-version }}
       CDN_BUCKET: cdn-dev.truekind.com
-      CLOUDFRONT_ID: EGLI7WZ8XA75
+      CLOUDFRONT_ID: E150KBA1EORKUL
       ENVIRONMENT_ACCOUNT_ID: 571168450468
     secrets: inherit
 
@@ -27,7 +27,7 @@ jobs:
       PACKAGE_NAME: storefront-static
       PACKAGE_VERSION: ${{ inputs.package-version }}
       CDN_BUCKET: cdn-stage.truekind.com
-      CLOUDFRONT_ID: E1D43726X3RDVZ
+      CLOUDFRONT_ID: ET6EL6JP5RKVK
       ENVIRONMENT_ACCOUNT_ID: 209977326717
     secrets: inherit
 
@@ -39,6 +39,6 @@ jobs:
       PACKAGE_NAME: storefront-static
       PACKAGE_VERSION: ${{ inputs.package-version }}
       CDN_BUCKET: cdn.truekind.com
-      CLOUDFRONT_ID: E9YUI9TP9V5D4
+      CLOUDFRONT_ID: E149D4XTBAJ9Q0
       ENVIRONMENT_ACCOUNT_ID: 316853325653
     secrets: inherit
