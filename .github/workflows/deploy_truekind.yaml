@@ -1,0 +1,44 @@
+name: Shapermint - All Environments Deploy
+on:
+  workflow_dispatch:
+    inputs:
+      package-version:
+        description: 'Version of the static content to deploy'
+        required: true
+
+jobs:
+  deploy_cdn_dev:
+    name: CDN-Dev
+    uses: trafilea/trafilea-reusable-workflows/.github/workflows/deploy-storefront-static.yaml@feature/cdn-workflows
+    with:
+      BUILDS_BUCKET: traf-core-builds
+      PACKAGE_NAME: storefront-static
+      PACKAGE_VERSION: ${{ inputs.package-version }}
+      CDN_BUCKET: cdn-dev.truekind.com
+      CLOUDFRONT_ID: E150KBA1EORKUL
+      ENVIRONMENT_ACCOUNT_ID: 571168450468
+    secrets: inherit
+
+  deploy_cdn_stage:
+    name: CDN-Stage
+    uses: trafilea/trafilea-reusable-workflows/.github/workflows/deploy-storefront-static.yaml@feature/cdn-workflows
+    with:
+      BUILDS_BUCKET: traf-core-builds
+      PACKAGE_NAME: storefront-static
+      PACKAGE_VERSION: ${{ inputs.package-version }}
+      CDN_BUCKET: cdn-stage.truekind.com
+      CLOUDFRONT_ID: ET6EL6JP5RKVK
+      ENVIRONMENT_ACCOUNT_ID: 209977326717
+    secrets: inherit
+
+  deploy_cdn_prod:
+    name: CDN-Prod
+    uses: trafilea/trafilea-reusable-workflows/.github/workflows/deploy-storefront-static.yaml@feature/cdn-workflows
+    with:
+      BUILDS_BUCKET: traf-core-builds
+      PACKAGE_NAME: storefront-static
+      PACKAGE_VERSION: ${{ inputs.package-version }}
+      CDN_BUCKET: cdn.truekind.com
+      CLOUDFRONT_ID: E149D4XTBAJ9Q0
+      ENVIRONMENT_ACCOUNT_ID: 316853325653
+    secrets: inherit
