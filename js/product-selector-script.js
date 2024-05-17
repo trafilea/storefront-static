@@ -118,7 +118,7 @@ const ProductSelector = {
                                 font-family: Tahoma, Arial, sans-serif;
                                 }
 
-                                .popup .content {
+                                .popup .loading_content {
                                 max-height: 30%;
                                 overflow: auto;
                                 }
@@ -126,7 +126,7 @@ const ProductSelector = {
                                 <div class="loading-overlay">
                                 <div class="popup">
                                 <div class="new__loader"></div>
-                                <div class="content">
+                                <div class="loading_content">
                                     Checking availability...		
                                 </div>
                                 </div>
