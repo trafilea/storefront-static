@@ -66,7 +66,7 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
                               text-align: center;
                             }
 
-                            .popup .content {
+                            .popup .popup_content {
                               max-height: 30%;
                               overflow: unset;
                             }
@@ -187,7 +187,7 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
                             </style>
                             <div class="loading-overlay">
                               <div class="popup">
-                                <div class="content">
+                                <div class="popup_content">
                                     <h2 class="pp_title">${config.title}</h2>
                                     <h3 class="pp_subtitle">${config.subtitle}</h2>
                                     <div class="css-141nkgt"><div class="css-nnhxy"><div class="css-vgmnak">${config.compare_at_price}</div><div class="css-101f6se">${config.price}</div></div></div>
