@@ -89,7 +89,7 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
                               border-radius: 10px;
                               color: #000000;
                               text-align: center;
-                              font-family: Montserrat;
+                              font-family: Poppins, Jost, Montserrat;
                               font-size: 16px;
                               font-style: normal;
                               font-weight: 700;
@@ -118,7 +118,7 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
                             .pp_title {
                               text-transform: uppercase;
                               color: ${config.accent_color};
-                              font-family: Poppins, Jost;
+                              font-family: Poppins, Jost, Montserrat;
                               font-size: 20px;
                               font-style: normal;
                               font-weight: 700;
@@ -129,7 +129,7 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
                               margin-bottom: 10px;
                               color: #000;
                               text-align: center;
-                              font-family: Poppins, Jost;
+                              font-family: Poppins, Jost, Montserrat;
                               font-size: 17px;
                               font-style: normal;
                               font-weight: 400;
@@ -215,29 +215,28 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
   };
 
   const openPopup = () => {
-      const popup = open();
+    const popup = open();
 
-      if (config.buttons.accept.onClick) {
-        popup.querySelector(".pp_accept").addEventListener("click", () => {
-          config.buttons.accept.onClick();
-        });
-      }
+    if (config.buttons.accept.onClick) {
+      popup.querySelector(".pp_accept").addEventListener("click", () => {
+        config.buttons.accept.onClick();
+      });
+    }
 
-      if (config.buttons.decline.onClick) {
-        popup.querySelector(".pp_decline").addEventListener("click", () => {
-          config.buttons.decline.onClick();
-        });
-      }
+    if (config.buttons.decline.onClick) {
+      popup.querySelector(".pp_decline").addEventListener("click", () => {
+        config.buttons.decline.onClick();
+      });
+    }
 
-    return popup
+    return popup;
   };
-  
+
   forEachElement(config.triggered_by, (element) => {
     element.addEventListener("click", (event) => {
       event.preventDefault();
 
       return openPopup();
-
     });
   });
 

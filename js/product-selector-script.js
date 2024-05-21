@@ -165,7 +165,39 @@ const ProductSelector = {
                 variant: product.vendor_product.variations_id[variant.id] ?? "",
                 sku: variant.sku,
                 image: variant.images[0]?.src ?? "",
+                try_before_you_buy: product.try_before_you_buy,
                 quantity,
+              },
+            ],
+          },
+        },
+      });
+    },
+    trackProductView: ({ product, variant, quantity }) => {
+      window.dataLayer = window.dataLayer || [];
+
+      window.dataLayer.push({
+        event: "enhanceEcom productView",
+        ecommerce: {
+          url: window.location.href,
+          detail: {
+            products: [
+              {
+                brand: product.vendor,
+                name: product.title,
+                id: product.vendor_product.product_id,
+                uuid: product.id,
+                variant_uuid: variant.id,
+                price: variant.price,
+                salePrice: variant.price,
+                compare_at_price: variant.compare_at_price,
+                unit_price: variant.price,
+                category: product.category?.name ?? "Product",
+                variant: product.vendor_product.variations_id[variant.id] ?? "",
+                sku: variant.sku,
+                image: variant.images[0]?.src ?? "",
+                quantity,
+                try_before_you_buy: product.try_before_you_buy,
               },
             ],
           },
@@ -222,6 +254,10 @@ const ProductSelector = {
         extra_products: ProductSelector.config.products.extra_products[index],
         ...ProductSelector.config.products.extras[index],
       };
+
+      ProductSelector._.trackProductView(
+        ProductSelector.state.product_selected
+      );
 
       if (ProductSelector.config.image_selector) {
         const newImage =
