@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 43 72" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 43 72" fill="none" testId="product_usage" id="product_usage">
+<title>Product usage</title>
 <path d="M19.6431 13.4119H1.73486V37.2636H19.6431V13.4119Z" stroke="#457A41" stroke-width="2.20408" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M19.6294 37.2635H1.72119V71.4494H19.6294V37.2635Z" stroke="#457A41" stroke-width="2.20408" stroke-linecap="round" stroke-linejoin="round"/>
 <circle cx="24.9645" cy="17.2653" r="17.2653" fill="white"/>
