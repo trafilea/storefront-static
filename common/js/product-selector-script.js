@@ -384,7 +384,14 @@ const ProductSelector = {
     TrafiCheckout.init(base);
     TrafiProducts.init(base);
 
-    ProductSelector.config = { ...ProductSelector.config, ...configOverride };
+    ProductSelector.config = {
+      ...ProductSelector.config,
+      ...configOverride,
+      products: {
+        ...ProductSelector.config.products,
+        ...configOverride.products,
+      },
+    };
 
     await ProductSelector._.fetchProducts();
 
