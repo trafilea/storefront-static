@@ -9,6 +9,8 @@ const ProductSelector = {
       extras: [],
       triggers: [],
       elementsToMark: [],
+      //TODO Remove this TBYB hardcoded price
+      try_before_you_buy_price: 49,
     },
   },
   state: {
@@ -157,7 +159,9 @@ const ProductSelector = {
                 id: product.vendor_product.product_id,
                 uuid: product.id,
                 variant_uuid: variant.id,
-                price: variant.price,
+                price: product.try_before_you_buy
+                  ? ProductSelector.config.products.try_before_you_buy_price
+                  : variant.price,
                 salePrice: variant.price,
                 compare_at_price: variant.compare_at_price,
                 unit_price: variant.price,
@@ -188,7 +192,9 @@ const ProductSelector = {
                 id: product.vendor_product.product_id,
                 uuid: product.id,
                 variant_uuid: variant.id,
-                price: variant.price,
+                price: product.try_before_you_buy
+                  ? ProductSelector.config.products.try_before_you_buy_price
+                  : variant.price,
                 salePrice: variant.price,
                 compare_at_price: variant.compare_at_price,
                 unit_price: variant.price,
