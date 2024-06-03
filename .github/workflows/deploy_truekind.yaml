@@ -1,9 +1,9 @@
-name: Shapermint - All Environments Deploy
+name: TrueKind - All Environments Deploy
 on:
   workflow_dispatch:
     inputs:
       package-version:
-        description: 'Version of the static content to deploy'
+        description: "Version of the static content to deploy"
         required: true
 
 jobs:
