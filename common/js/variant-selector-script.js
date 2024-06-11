@@ -13,6 +13,8 @@ const VariantSelector = (
       quantity: 1,
       color: undefined,
       size: undefined,
+      attributes_definition: [],
+      attributes: {},
     },
     triggers: {
       buyNow: "",
@@ -240,19 +242,40 @@ const VariantSelector = (
 
     if (!quantity) throw new Error("VariantSelector: No quantity");
 
-    const color =
-      typeof config.product.color === "function"
-        ? config.product.color()
-        : config.product.color;
+    const { attributes_definition, attributes } = config.product;
+    let attributesToValue = {};
 
-    if (!color) throw new Error("VariantSelector: No color");
+    if (attributes_definition.length && Object.keys(attributes).length) {
+      attributesToValue = attributes_definition.reduce(
+        (result, attributeName) => {
+          const variant = attributes[attributeName];
+          const value = typeof variant === "function" ? variant() : variant;
 
-    const size =
-      typeof config.product.size === "function"
-        ? config.product.size()
-        : config.product.size;
+          if (!value) {
+            throw new Error(`VariantSelector: No ${attributeName}`);
+          }
 
-    if (!size) throw new Error("VariantSelector: No size");
+          result[attributeName] = value;
+        }
+      );
+    } else {
+      const color =
+        typeof config.product.color === "function"
+          ? config.product.color()
+          : config.product.color;
+
+      if (!color) throw new Error("VariantSelector: No color");
+
+      const size =
+        typeof config.product.size === "function"
+          ? config.product.size()
+          : config.product.size;
+
+      if (!size) throw new Error("VariantSelector: No size");
+
+      attributesToValue[ATTRIBUTES.Color] = color;
+      attributesToValue[ATTRIBUTES.Size] = size;
+    }
 
     Utils.setLoading();
 
@@ -260,12 +283,9 @@ const VariantSelector = (
       state.product.variations_definition.product_variations.find((variant) => {
         const isTheRightVariant = variant.variation_attributes.every(
           (attribute) => {
-            if (attribute.name === ATTRIBUTES.Color) {
-              return attribute.value === color;
-            }
-            if (attribute.name === ATTRIBUTES.Size) {
-              return attribute.value === size;
-            }
+            const value = attributesToValue[attribute.name];
+
+            if (value) return attribute.value === value;
 
             return false;
           }
