@@ -257,6 +257,7 @@ const VariantSelector = (
           }
 
           result[attributeName] = value;
+          return result;
         },
         {}
       );
