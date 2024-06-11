@@ -11,14 +11,20 @@ const VariantSelector = (
       slug: "",
       vendorId: "",
       quantity: 1,
+      color: undefined,
+      size: undefined,
       attributes_definition: [],
-      attributes: {}
+      attributes: {},
     },
     triggers: {
       buyNow: "",
     },
   }
 ) => {
+  const ATTRIBUTES = {
+    Color: "Color",
+    Size: "Size",
+  };
 
   let state = {
     product: undefined,
@@ -238,20 +244,40 @@ const VariantSelector = (
 
     if (!quantity) throw new Error("VariantSelector: No quantity");
 
-    const {attributes_definition, attributes} = config.product;
+    const { attributes_definition, attributes } = config.product;
 
-    const attributesToValue = {}
+    if (attributes_definition.length && Object.keys(attributes).length) {
+      attributesToValue = attributes_definition.reduce(
+        (result, attributeName) => {
+          const variant = attributes[attributeName];
+          const value = typeof variant === "function" ? variant() : variant;
 
-    attributes_definition.forEach((attributeName) => {
-      const variant = attributes[attributeName]
-      const value = typeof variant === "function" ? variant() : variant;
+          if (!value) {
+            throw new Error(`VariantSelector: No ${attributeName}`);
+          }
 
-      if (!value) {
-        throw new Error(`VariantSelector: No ${attribute}`);
-      }
+          result[attributeName] = value;
+        },
+        {}
+      );
+    } else {
+      const color =
+        typeof config.product.color === "function"
+          ? config.product.color()
+          : config.product.color;
 
-      attributesToValue[attributeName] = value;
-    })
+      if (!color) throw new Error("VariantSelector: No color");
+
+      const size =
+        typeof config.product.size === "function"
+          ? config.product.size()
+          : config.product.size;
+
+      if (!size) throw new Error("VariantSelector: No size");
+
+      attributesToValue[ATTRIBUTES.Color] = color;
+      attributesToValue[ATTRIBUTES.Size] = size;
+    }
 
     Utils.setLoading();
 
@@ -259,7 +285,7 @@ const VariantSelector = (
       state.product.variations_definition.product_variations.find((variant) => {
         const isTheRightVariant = variant.variation_attributes.every(
           (attribute) => {
-            const value = attributesToValue[attribute.name]
+            const value = attributesToValue[attribute.name];
 
             if (value) return attribute.value === value;
 
