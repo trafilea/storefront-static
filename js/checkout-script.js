@@ -169,6 +169,7 @@ const TrafiCheckout = {
       discounts_total: rest.discount,
       discount_label: rest.discount_label,
       subscription: rest.subscription,
+      try_before_you_buy: product.try_before_you_buy,
     }),
     buildFromItems: (itemsToTransform) => {
       const items = itemsToTransform.map((item) =>
@@ -181,22 +182,37 @@ const TrafiCheckout = {
     update: async (cart) => TrafiCheckout._.updateCart(cart),
   },
   checkout: {
-    redirect: async (cartId) => {
+    redirect: async (cartId, baseCart) => {
       const hc_url = TrafiCheckout.config.checkout_url
         .replace("{domain}", TrafiCheckout.config.domain)
         .replace("{cart_id}", cartId);
       console.log("HC URL is:", hc_url);
+
+      const isTBYB =
+        baseCart &&
+        baseCart.items &&
+        baseCart.items.find((item) => item.try_before_you_buy);
+
+      if (isTBYB) {
+        document.cookie = `tbyb=true; domain=.${
+          TrafiCheckout.config.domain
+        }; path=${new URL(hc_url).pathname}`;
+      }
+
       window.location.assign(hc_url);
     },
     buyNow: async (item) => {
-      const cart = await TrafiCheckout.cart.create(
-        TrafiCheckout.cart.buildFromItems(Array.isArray(item) ? item : [item])
+      const baseCart = TrafiCheckout.cart.buildFromItems(
+        Array.isArray(item) ? item : [item]
       );
-      TrafiCheckout.checkout.redirect(cart.token);
+
+      const cart = await TrafiCheckout.cart.create(baseCart);
+
+      TrafiCheckout.checkout.redirect(cart.token, baseCart);
     },
     start: async (cart) => {
       const updatedCart = await TrafiCheckout._.updateCart(cart);
-      TrafiCheckout.checkout.redirect(updatedCart.token);
+      TrafiCheckout.checkout.redirect(updatedCart.token, updatedCart);
     },
   },
 };

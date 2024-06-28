@@ -9,6 +9,8 @@ const ProductSelector = {
       extras: [],
       triggers: [],
       elementsToMark: [],
+      //TODO Remove this TBYB hardcoded price
+      try_before_you_buy_price: 49,
     },
   },
   state: {
@@ -118,7 +120,7 @@ const ProductSelector = {
                                 font-family: Tahoma, Arial, sans-serif;
                                 }
 
-                                .popup .content {
+                                .popup .loading_content {
                                 max-height: 30%;
                                 overflow: auto;
                                 }
@@ -126,7 +128,7 @@ const ProductSelector = {
                                 <div class="loading-overlay">
                                 <div class="popup">
                                 <div class="new__loader"></div>
-                                <div class="content">
+                                <div class="loading_content">
                                     Redirecting to Checkout. Please Wait		
                                 </div>
                                 </div>
@@ -157,7 +159,42 @@ const ProductSelector = {
                 id: product.vendor_product.product_id,
                 uuid: product.id,
                 variant_uuid: variant.id,
-                price: variant.price,
+                price: product.try_before_you_buy
+                  ? ProductSelector.config.products.try_before_you_buy_price
+                  : variant.price,
+                salePrice: variant.price,
+                compare_at_price: variant.compare_at_price,
+                unit_price: variant.price,
+                category: product.category?.name ?? "Product",
+                variant: product.vendor_product.variations_id[variant.id] ?? "",
+                sku: variant.sku,
+                image: variant.images[0]?.src ?? "",
+                try_before_you_buy: product.try_before_you_buy,
+                quantity,
+              },
+            ],
+          },
+        },
+      });
+    },
+    trackProductView: ({ product, variant, quantity }) => {
+      window.dataLayer = window.dataLayer || [];
+
+      window.dataLayer.push({
+        event: "enhanceEcom productView",
+        ecommerce: {
+          url: window.location.href,
+          detail: {
+            products: [
+              {
+                brand: product.vendor,
+                name: product.title,
+                id: product.vendor_product.product_id,
+                uuid: product.id,
+                variant_uuid: variant.id,
+                price: product.try_before_you_buy
+                  ? ProductSelector.config.products.try_before_you_buy_price
+                  : variant.price,
                 salePrice: variant.price,
                 compare_at_price: variant.compare_at_price,
                 unit_price: variant.price,
@@ -166,6 +203,7 @@ const ProductSelector = {
                 sku: variant.sku,
                 image: variant.images[0]?.src ?? "",
                 quantity,
+                try_before_you_buy: product.try_before_you_buy,
               },
             ],
           },
@@ -222,6 +260,10 @@ const ProductSelector = {
         extra_products: ProductSelector.config.products.extra_products[index],
         ...ProductSelector.config.products.extras[index],
       };
+
+      ProductSelector._.trackProductView(
+        ProductSelector.state.product_selected
+      );
 
       if (ProductSelector.config.image_selector) {
         const newImage =
@@ -342,7 +384,14 @@ const ProductSelector = {
     TrafiCheckout.init(base);
     TrafiProducts.init(base);
 
-    ProductSelector.config = { ...ProductSelector.config, ...configOverride };
+    ProductSelector.config = {
+      ...ProductSelector.config,
+      ...configOverride,
+      products: {
+        ...ProductSelector.config.products,
+        ...configOverride.products,
+      },
+    };
 
     await ProductSelector._.fetchProducts();
 
