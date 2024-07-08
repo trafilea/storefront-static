@@ -30,109 +30,37 @@ const ProductSelector = {
     },
     setLoading: () => {
       const loading = document.createElement("div");
+      loading.id = "teLoadingSpinner";
       loading.innerHTML = `
-                                <style>
-                                .new__loader,
-                                .new__loader:before,
-                                .new__loader:after {
-                                border-radius: 50%;
-                                width: 2.5em;
-                                height: 2.5em;
-                                -webkit-animation-fill-mode: both;
-                                animation-fill-mode: both;
-                                -webkit-animation: load7 1.8s infinite ease-in-out;
-                                animation: load7 1.8s infinite ease-in-out;
-                                }
-                                .new__loader {
-                                color: #000000;
-                                font-size: 10px;
-                                margin: 10px auto 50px;
-                                position: relative;
-                                text-indent: -9999em;
-                                -webkit-transform: translateZ(0);
-                                -ms-transform: translateZ(0);
-                                transform: translateZ(0);
-                                -webkit-animation-delay: -0.16s;
-                                animation-delay: -0.16s;
-                                }
-                                .new__loader:before,
-                                .new__loader:after {
-                                content: '';
-                                position: absolute;
-                                top: 0;
-                                }
-                                .new__loader:before {
-                                left: -3.5em;
-                                -webkit-animation-delay: -0.32s;
-                                animation-delay: -0.32s;
-                                }
-                                .new__loader:after {
-                                left: 3.5em;
-                                }
-                                @-webkit-keyframes load7 {
-                                0%,
-                                80%,
-                                100% {
-                                box-shadow: 0 2.5em 0 -1.3em;
-                                }
-                                40% {
-                                box-shadow: 0 2.5em 0 0;
-                                }
-                                }
-                                @keyframes load7 {
-                                0%,
-                                80%,
-                                100% {
-                                box-shadow: 0 2.5em 0 -1.3em;
-                                }
-                                40% {
-                                box-shadow: 0 2.5em 0 0;
-                                }
-                                }
-
-                                .loading-overlay {
-                                position: fixed;
-                                top: 0;
-                                bottom: 0;
-                                left: 0;
-                                right: 0;
-                                background: rgba(0, 0, 0, 0.7);
-                                transition: opacity 500ms;
-                                opacity: 1;
-                                z-index: 111;
-                                width: 100%;
-                                }
-                                .popup {
-                                margin: 20% auto;
-                                padding: 40px;
-                                background: #fff;
-                                border-radius: 5px;
-                                width: 30%;
-                                min-width: 300px;
-                                position: relative;
-                                transition: all 5s ease-in-out;
-                                text-align: center;
-                                }
-
-                                .popup h2 {
-                                margin-top: 0;
-                                color: #333;
-                                font-family: Tahoma, Arial, sans-serif;
-                                }
-
-                                .popup .loading_content {
-                                max-height: 30%;
-                                overflow: auto;
-                                }
-                                </style>
-                                <div class="loading-overlay">
-                                <div class="popup">
-                                <div class="new__loader"></div>
-                                <div class="loading_content">
-                                    Redirecting to Checkout. Please Wait		
-                                </div>
-                                </div>
-                                </div>`;
+                    <style>
+                      .te-css-1b8tvgl {
+                        position: fixed;
+                        top: 0px;
+                        left: 0px;
+                        z-index: 999999999;
+                        height: 100vh;
+                        width: 100vw;
+                        background-color: rgba(0, 0, 0, 0.2);
+                        display: flex;
+                        -webkit-box-align: center;
+                        align-items: center;
+                        -webkit-box-pack: center;
+                        justify-content: center;
+                      }
+                      .te-css-1xvl8o4 {
+                        border-right: 2px solid transparent;
+                        border-bottom: 2px solid transparent;
+                        border-left: 2px solid transparent;
+                        border-image: initial;
+                        border-top: 2px solid black;
+                        border-radius: 50%;
+                        animation: 1s linear 0s infinite normal none running spin;
+                      }
+                    </style>
+                    <div opacity="0.2" class="te-css-1b8tvgl">
+                      <div class="te-css-1xvl8o4" style="width: 60px; height: 60px"></div>
+                    </div>
+      `;
 
       document.body.appendChild(loading);
 
@@ -143,6 +71,12 @@ const ProductSelector = {
         },
         false
       );
+    },
+    stopLoading: () => {
+      const loading = document.getElementById("teLoadingSpinner");
+      if (loading) {
+        loading.remove();
+      }
     },
     trackAddToCart: ({ product, variant, quantity }) => {
       window.dataLayer = window.dataLayer || [];
@@ -298,46 +232,52 @@ const ProductSelector = {
     },
     getQuantity: () => {},
     checkout: async () => {
-      if (!ProductSelector.state.product_selected)
-        throw new Error("ProductSelector: No product selected");
+      try {
+        if (!ProductSelector.state.product_selected) {
+          throw new Error("No product selected");
+        }
 
-      ProductSelector._.setLoading();
+        ProductSelector._.setLoading();
 
-      const quantity =
-        typeof ProductSelector.state.product_selected.quantity === "function"
-          ? ProductSelector.state.product_selected.quantity()
-          : ProductSelector.state.product_selected.quantity;
+        const quantity =
+          typeof ProductSelector.state.product_selected.quantity === "function"
+            ? ProductSelector.state.product_selected.quantity()
+            : ProductSelector.state.product_selected.quantity;
 
-      const productSelected = {
-        ...ProductSelector.state.product_selected,
-        quantity,
-      };
+        const productSelected = {
+          ...ProductSelector.state.product_selected,
+          quantity,
+        };
 
-      ProductSelector._.trackAddToCart(productSelected);
+        ProductSelector._.trackAddToCart(productSelected);
 
-      if (productSelected.extra_products) {
-        const extraProducts = productSelected.extra_products
-          .map((slug) => {
-            if (ProductSelector.state.extra_products[slug]) {
-              return {
-                product: ProductSelector.state.extra_products[slug],
-                variant:
-                  ProductSelector.state.extra_products[slug]
-                    .variations_definition.product_variations[0],
-                quantity: 1,
-              };
-            }
-            return undefined;
-          })
-          .filter((product) => Boolean(product));
+        if (productSelected.extra_products) {
+          const extraProducts = productSelected.extra_products
+            .map((slug) => {
+              if (ProductSelector.state.extra_products[slug]) {
+                return {
+                  product: ProductSelector.state.extra_products[slug],
+                  variant:
+                    ProductSelector.state.extra_products[slug]
+                      .variations_definition.product_variations[0],
+                  quantity: 1,
+                };
+              }
+              return undefined;
+            })
+            .filter((product) => Boolean(product));
 
-        const items = [productSelected, ...extraProducts];
+          const items = [productSelected, ...extraProducts];
 
-        await TrafiCheckout.checkout.buyNow(items);
-        return;
+          await TrafiCheckout.checkout.buyNow(items);
+          return;
+        }
+
+        await TrafiCheckout.checkout.buyNow(productSelected);
+      } catch (error) {
+        ProductSelector._.stopLoading();
+        console.error("TE-ProductSelector-Checkout [Error]", error);
       }
-
-      await TrafiCheckout.checkout.buyNow(productSelected);
     },
     setupTriggers: () => {
       ProductSelector.config.products.triggers?.forEach((trigger) => {
@@ -407,7 +347,7 @@ const ProductSelector = {
 
     console.log("ProductSelector: Successfully set config");
   },
-  checkout: () => ProductSelector._.checkout(),
+  checkout: async () => ProductSelector._.checkout(),
 };
 
 const CreateNewProductSelector = (config) => {
