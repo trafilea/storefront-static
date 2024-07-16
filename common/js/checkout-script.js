@@ -178,8 +178,8 @@ const TrafiCheckout = {
       const totals = TrafiCheckout._.calculateTotals(items);
       return { currency: TrafiCheckout.config.currency, items, totals };
     },
-    create: async (cart) => TrafiCheckout._.updateCart(cart),
-    update: async (cart) => TrafiCheckout._.updateCart(cart),
+    create: (cart) => TrafiCheckout._.updateCart(cart),
+    update: (cart) => TrafiCheckout._.updateCart(cart),
   },
   checkout: {
     redirect: async (cartId, baseCart) => {
