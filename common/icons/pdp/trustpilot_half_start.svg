@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 16 19" fill="currentColor" >
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 16 19" fill="currentColor" id="trust_pilot_half_start">
+    <title>Trust Pilot Half Start</title>
     <rect x="7.5166" y="0.892578" width="7.5484" height="17.6129" fill="#D1D1D1" />
     <rect x="0.101562" y="0.892578" width="10.0645" height="17.6129"  />
     <path fill-rule="evenodd" clip-rule="evenodd"
