@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 50 51" testId="" id="magnify">
+<title>Magnify</title>
+<circle cx="19.65" cy="18.65" r="13.1882" fill="white" stroke="#457A41" stroke-width="0.923559"/>
+<path d="M19.0001 8.84347C20.5625 8.84938 23.3248 9.4006 26.1989 12.1157" stroke="#9AB898" stroke-width="1.3" stroke-linecap="round"/>
+<path d="M29.3999 28.4L44.9999 44" stroke="#457A41" stroke-width="1.3" stroke-linecap="round"/>
+</svg>
