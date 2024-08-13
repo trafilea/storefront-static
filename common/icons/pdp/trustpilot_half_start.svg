@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 16 19" fill="currentColor" id="trust_pilot_half_start">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 16 19"  id="trustpilot_half_start">
     <title>Trust Pilot Half Start</title>
     <rect x="7.5166" y="0.892578" width="7.5484" height="17.6129" fill="#D1D1D1" />
-    <rect x="0.101562" y="0.892578" width="10.0645" height="17.6129"  />
+    <rect x="0.101562" y="0.892578" width="10.0645" height="17.6129"  fill="currentColor"/>
     <path fill-rule="evenodd" clip-rule="evenodd"
         d="M9.26676 12.6722L11.8825 12.0135L12.9753 15.3604L9.26676 12.6722ZM15.2865 8.34614H10.6821L9.26679 4.03784L7.85143 8.34614H3.24707L6.97354 11.0166L5.55822 15.3249L9.28471 12.6544L11.5779 11.0166L15.2865 8.34614H15.2865Z"
         fill="white" />
