@@ -1,35 +1,35 @@
 {
-  countries: {
-    AU: "Australia";
-    BR: "Brazil";
-    CA: "Canada";
-    DK: "Denmark";
-    EG: "Egypt";
-    FI: "Finland";
-    FR: "France";
-    DE: "Germany";
-    IN: "India";
-    IT: "Italy";
-    MY: "Malaysia";
-    MX: "Mexico";
-    NZ: "New Zealand";
-    NO: "Norway";
-    PL: "Poland";
-    QA: "Qatar";
-    RO: "Romania";
-    SA: "Saudi Arabia";
-    SG: "Singapore";
-    ZA: "South Africa";
-    ES: "Spain";
-    SE: "Sweden";
-    TH: "Thailand";
-    TR: "Turkey";
-    AE: "United Arab Emirates";
-    GB: "United Kingdom";
-    US: "United States";
-  }
-  statesByCountry: {
-    US: [
+  "countries": {
+    "AU": "Australia",
+    "BR": "Brazil",
+    "CA": "Canada",
+    "DK": "Denmark",
+    "EG": "Egypt",
+    "FI": "Finland",
+    "FR": "France",
+    "DE": "Germany",
+    "IN": "India",
+    "IT": "Italy",
+    "MY": "Malaysia",
+    "MX": "Mexico",
+    "NZ": "New Zealand",
+    "NO": "Norway",
+    "PL": "Poland",
+    "QA": "Qatar",
+    "RO": "Romania",
+    "SA": "Saudi Arabia",
+    "SG": "Singapore",
+    "ZA": "South Africa",
+    "ES": "Spain",
+    "SE": "Sweden",
+    "TH": "Thailand",
+    "TR": "Turkey",
+    "AE": "United Arab Emirates",
+    "GB": "United Kingdom",
+    "US": "United States"
+  },
+  "statesByCountry": {
+    "US": [
       ["", "Select"],
       ["AL", "Alabama"],
       ["AZ", "Arizona"],
@@ -80,9 +80,9 @@
       ["WA", "Washington"],
       ["WV", "West Virginia"],
       ["WI", "Wisconsin"],
-      ["WY", "Wyoming"],
-    ];
-    CA: [
+      ["WY", "Wyoming"]
+    ],
+    "CA": [
       ["", "Select"],
       ["AB", "Alberta"],
       ["BC", "British Columbia"],
@@ -96,9 +96,9 @@
       ["PE", "Prince Edward Island"],
       ["QC", "Quebec"],
       ["SK", "Saskatchewan"],
-      ["YT", "Yukon"],
-    ];
-    AU: [
+      ["YT", "Yukon"]
+    ],
+    "AU": [
       ["", "Select"],
       ["ACT", "Australian Capital Territory"],
       ["NSW", "New South Wales"],
@@ -107,9 +107,9 @@
       ["SA", "South Australia"],
       ["TAS", "Tasmania"],
       ["VIC", "Victoria"],
-      ["WA", "Western Australia"],
-    ];
-    IT: [
+      ["WA", "Western Australia"]
+    ],
+    "IT": [
       ["", "Select"],
       ["AG", "Agrigento"],
       ["AL", "Alessandria"],
@@ -215,9 +215,9 @@
       ["VR", "Verona"],
       ["VV", "Vibo Valentia"],
       ["VI", "Vicenza"],
-      ["VT", "Viterbo"],
-    ];
-    MX: [
+      ["VT", "Viterbo"]
+    ],
+    "MX": [
       ["", "Select"],
       ["AGS", "Aguascalientes"],
       ["BC", "Baja California"],
@@ -250,9 +250,9 @@
       ["TLAX", "Tlaxcala"],
       ["VER", "Veracruz"],
       ["YUC", "Yucatán"],
-      ["ZAC", "Zacatecas"],
-    ];
-    NZ: [
+      ["ZAC", "Zacatecas"]
+    ],
+    "NZ": [
       ["", "Select"],
       ["AUK", "Auckland"],
       ["BOP", "Bay of Plenty"],
@@ -270,9 +270,9 @@
       ["TAS", "Tasman"],
       ["WKO", "Waikato"],
       ["WGN", "Wellington"],
-      ["WTC", "West Coast"],
-    ];
-    ES: [
+      ["WTC", "West Coast"]
+    ],
+    "ES": [
       ["", "Select"],
       ["Albacete", "Albacete"],
       ["Alicante", "Alicante"],
@@ -322,9 +322,9 @@
       ["Zamora", "Zamora"],
       ["Zaragoza", "Zaragoza"],
       ["Álava", "Álava"],
-      ["Ávila", "Ávila"],
-    ];
-    RO: [
+      ["Ávila", "Ávila"]
+    ],
+    "RO": [
       ["", "Select"],
       ["AB", "Alba"],
       ["AR", "Arad"],
@@ -365,7 +365,7 @@
       ["TM", "Timis"],
       ["VL", "Valcea"],
       ["VS", "Vaslui"],
-      ["VN", "Vrancea"],
-    ];
+      ["VN", "Vrancea"]
+    ]
   }
 }
