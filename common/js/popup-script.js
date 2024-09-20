@@ -10,6 +10,7 @@ let defaultPopupConfig = {
   price: "FREE",
   compare_at_price: "$9.95",
   buttons: {
+    close: false,
     accept: {
       text: "YES, I want it!",
       class: "",
@@ -97,8 +98,8 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
                             }
 
                             .pp_accept {
-                              background: #FFC700;
-                              border: 1px solid #FFC700;
+                              background: ${config.accent_color};
+                              border: 1px solid ${config.accent_color};
                             }
 
                             .pp_accept:hover {
@@ -108,7 +109,7 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
                             .pp_decline {
                               border-width: 1px;
                               background: white;
-                              border: 1px solid #FFC700;
+                              border: 1px solid ${config.accent_color};
                             }
 
                             .pp_decline:hover {
@@ -184,18 +185,48 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
                               color: white;
                               font-weight: bold;
                             }
+                            .css-1ihl813 {
+                                align-self: end;
+                                cursor: pointer;
+                                position: absolute;
+                                right: 0;
+                                margin-right: 16px;
+                            }
+                            .css-jjwccd {
+                                width: 16px;
+                                height: 16px;
+                                display: inline-block;
+                                vertical-align: middle;
+                            }
                             </style>
                             <div class="loading-overlay">
                               <div class="popup">
                                 <div class="popup_content">
+                                    ${
+                                      config.buttons.close
+                                        ? `<div data-testid="close-quickview" class="css-1ihl813"><img alt="actions/clear_light" height="16px" width="16px" src="https://cdn.thespadr.com/assets/common/icons/actions/close.svg" class="css-jjwccd"></div>`
+                                        : ""
+                                    }
                                     <h2 class="pp_title">${config.title}</h2>
-                                    <h3 class="pp_subtitle">${config.subtitle}</h2>
-                                    <div class="css-141nkgt"><div class="css-nnhxy"><div class="css-vgmnak">${config.compare_at_price}</div><div class="css-101f6se">${config.price}</div></div></div>
-                                    <img class="pp_image" src="${config.image}" alt="Popup Image" />
+                                    <h3 class="pp_subtitle">${
+                                      config.subtitle
+                                    }</h2>
+                                    <div class="css-141nkgt"><div class="css-nnhxy"><div class="css-vgmnak">${
+                                      config.compare_at_price
+                                    }</div><div class="css-101f6se">${
+      config.price
+    }</div></div></div>
+                                    <img class="pp_image" src="${
+                                      config.image
+                                    }" alt="Popup Image" />
                                     <div class="pp_buttons">
                                       <h6 class="pp_label">${config.label}</h6>
-                                      <button class="pp_accept ${config.buttons.accept.class}">${config.buttons.accept.text}</button>
-                                      <button class="pp_decline ${config.buttons.decline.class}">${config.buttons.decline.text}</button>
+                                      <button class="pp_accept ${
+                                        config.buttons.accept.class
+                                      }">${config.buttons.accept.text}</button>
+                                      <button class="pp_decline ${
+                                        config.buttons.decline.class
+                                      }">${config.buttons.decline.text}</button>
                                     </div>
                                 </div>
                               </div>
@@ -227,6 +258,14 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
       popup.querySelector(".pp_decline").addEventListener("click", () => {
         config.buttons.decline.onClick();
       });
+    }
+
+    if (config.buttons.close) {
+      popup
+        .querySelector("[alt='actions/clear_light']")
+        .addEventListener("click", () => {
+          popup.remove();
+        });
     }
 
     return popup;
