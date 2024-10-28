@@ -22,10 +22,13 @@ let defaultPopupConfig = {
       onClick: () => {},
     },
   },
+  onBeforeOpen: () => true,
+  html: undefined,
+  htmlAfter: undefined,
 };
 
 const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
-  const config = { ...(defaultPopupConfig ?? {}), ...overrideConfig };
+  let config = { ...(defaultPopupConfig ?? {}), ...overrideConfig };
   const forEachElement = (trigger, callback) => {
     const array = document.querySelectorAll(trigger);
 
@@ -207,27 +210,21 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
                                         ? `<div data-testid="close-quickview" class="css-1ihl813"><img alt="actions/clear_light" height="16px" width="16px" src="https://cdn.thespadr.com/assets/common/icons/actions/close.svg" class="css-jjwccd"></div>`
                                         : ""
                                     }
+                                    ${
+                                      config.html ??
+                                      `
                                     <h2 class="pp_title">${config.title}</h2>
-                                    <h3 class="pp_subtitle">${
-                                      config.subtitle
-                                    }</h2>
-                                    <div class="css-141nkgt"><div class="css-nnhxy"><div class="css-vgmnak">${
-                                      config.compare_at_price
-                                    }</div><div class="css-101f6se">${
-      config.price
-    }</div></div></div>
-                                    <img class="pp_image" src="${
-                                      config.image
-                                    }" alt="Popup Image" />
+                                    <h3 class="pp_subtitle">${config.subtitle}</h2>
+                                    <div class="css-141nkgt"><div class="css-nnhxy"><div class="css-vgmnak">${config.compare_at_price}</div><div class="css-101f6se">${config.price}</div></div></div>
+                                    <img class="pp_image" src="${config.image}" alt="Popup Image" />           
                                     <div class="pp_buttons">
                                       <h6 class="pp_label">${config.label}</h6>
-                                      <button class="pp_accept ${
-                                        config.buttons.accept.class
-                                      }">${config.buttons.accept.text}</button>
-                                      <button class="pp_decline ${
-                                        config.buttons.decline.class
-                                      }">${config.buttons.decline.text}</button>
+                                      <button class="pp_accept ${config.buttons.accept.class}">${config.buttons.accept.text}</button>
+                                      <button class="pp_decline ${config.buttons.decline.class}">${config.buttons.decline.text}</button>
                                     </div>
+                                     `
+                                    }
+                                     ${config.htmlAfter ?? ""}
                                 </div>
                               </div>
                             </div>`;
@@ -275,7 +272,9 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
     element.addEventListener("click", (event) => {
       event.preventDefault();
 
-      return openPopup();
+      const shouldOpen = config.onBeforeOpen(config);
+
+      return shouldOpen ? openPopup() : null;
     });
   });
 
@@ -283,5 +282,6 @@ const TrafiPopup = (overrideConfig = defaultPopupConfig) => {
     close: () => {
       document.getElementById(config.name)?.remove();
     },
+    config,
   };
 };
