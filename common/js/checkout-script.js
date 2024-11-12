@@ -24,6 +24,11 @@ const TrafiCheckout = {
      * One of 'production' or 'stage'
      * @type String
      */
+    country: "US",
+    /**
+     * One of 'US' or 'CA', etc.
+     * @type String
+     */
     environment: "production",
     /**
      * Headless Checkout checkout url string
@@ -39,9 +44,12 @@ const TrafiCheckout = {
   _: {
     formatValue: (number) => Number(number.toFixed(2)),
     generatePayload: (cart) => {
+      const config = TrafiCheckout.config;
+
       const data = {
         token: cart.token,
-        currency: cart.currency,
+        currency: config.currency || "USD",
+        country_code: config.country_code || "US",
         currency_ratio: 1,
         email: "script@trafilea.com",
         items: cart.items,
@@ -49,8 +57,6 @@ const TrafiCheckout = {
       };
 
       const context = {};
-
-      const config = TrafiCheckout.config;
 
       const payload = {
         vendor: config.vendor,
@@ -176,7 +182,7 @@ const TrafiCheckout = {
         TrafiCheckout.cart.createItem(item)
       );
       const totals = TrafiCheckout._.calculateTotals(items);
-      return { currency: TrafiCheckout.config.currency, items, totals };
+      return { items, totals };
     },
     create: (cart) => TrafiCheckout._.updateCart(cart),
     update: (cart) => TrafiCheckout._.updateCart(cart),
